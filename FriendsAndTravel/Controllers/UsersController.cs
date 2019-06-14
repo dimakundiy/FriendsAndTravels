@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FriendsAndTravel.Controllers
 {
-   
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         UserManager<User> _userManager;
