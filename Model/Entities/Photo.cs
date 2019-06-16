@@ -11,7 +11,7 @@ namespace FriendsAndTravel.Data.Entities
 
         [Required]
         [MaxLength(DataConstants.MaxPhotoLength)]
-        public byte[] PhotoAsBytes { get; set; }
+        public string Path { get; set; }
 
         public string UserId { get; set; }
 
