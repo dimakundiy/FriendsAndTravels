@@ -22,7 +22,9 @@ namespace FriendsAndTravel.Models
 
         [Required]
         public string Phone { get; set; }
-        [Required]
-        public Location Location { get; set; }
+      //  [Required]
+      //  public Location location { get; set; }
+
+       
     }
 }
