@@ -39,11 +39,11 @@ namespace FriendsAndTravel.BAL.Services
                // Profile clientProfile = new Profile { Id = user.Id, Birthday = userDto.Birthday, Gender = userDto.Gender, Location = location };
                
                 await Database.SaveAsync();
-                return new OperationDetails(true, "Регистрация успешно пройдена", "");
+                return new OperationDetails(true, "Registration successfully completed!", "");
             }
             else
             {
-                return new OperationDetails(false, "Пользователь с таким логином уже существует", "Email");
+                return new OperationDetails(false, "User with this login already exists", "Email");
             }
         }
 

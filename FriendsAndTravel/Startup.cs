@@ -34,7 +34,7 @@ namespace FriendsAndTravel
             public void ConfigureServices(IServiceCollection services)
             {
                 services.AddDbContext<FriendsAndTravelDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("FriendsAndTravel.DAL")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("FriendsAndTravel")));
 
                 // dotnet ef migrations add InitDB --project ../LetsTogether.DAL -c AppDBContext
                 services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<FriendsAndTravelDbContext>();

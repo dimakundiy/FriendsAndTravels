@@ -29,8 +29,7 @@ namespace FriendsAndTravel.Data.Entities
         public string Role { get; set; }
         public IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
 
-      //  [Required]
-        public byte[] ProfilePicture { get; set; }
+      public string PhotoPath { get; set; }
 
         public ICollection<Post> Posts { get; set; } = new List<Post>();
 

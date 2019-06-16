@@ -8,16 +8,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Model.Entities;
+using FriendsAndTravel.Data.Interfaces;
+using FriendsAndTravel.BAL.Infrastructure;
+
 namespace FriendsAndTravel.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         UserManager<User> _userManager;
-
-        public UsersController(UserManager<User> userManager)
+        Data.Interfaces.IUnitOfWork Database { get; set; }
+        public UsersController(UserManager<User> userManager, IUnitOfWork uow)
         {
             _userManager = userManager;
+            Database = uow;
         }
 
         public IActionResult Index() => View(_userManager.Users.ToList());
@@ -27,23 +31,37 @@ namespace FriendsAndTravel.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserViewModel model)
         {
-            if (ModelState.IsValid)
+            User user = await Database.UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, Birthday = model.Birthday };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
+                    user = new User { Email = model.Email, UserName = model.Username, Birthday = model.Birthday };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError(string.Empty, error.Description);
+
+                        return RedirectToAction("Index");
+
+                    }
+                    else
+                    {
+
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+
                     }
                 }
+               return View(model);
             }
-            return View(model);
+
+            
+                // You can decide to throw an error or update the entity. Let's throw error
+                ModelState.AddModelError("", "User with this login already exists!");
+                return View(model);
+            
         }
 
         public async Task<IActionResult> Edit(string id)
