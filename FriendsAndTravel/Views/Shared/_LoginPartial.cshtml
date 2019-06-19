@@ -19,15 +19,17 @@
             <li><a asp-area="Roles" asp-controller="Roles" asp-action="Index">Roles manager</a></li>
             <li><a asp-area="Users" asp-controller="Users" asp-action="Index">Manage Users</a></li>
             <li><a asp-area="" asp-controller="Users" asp-action="Search">Search Users</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="@User.GetUserId()"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name Account</a></li>
+            <li><a asp-area="Account" asp-controller="Profile" asp-action="Index" asp-route-id="@User.GetUserId()"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name Profile</a></li>
         </ul>
     }
     @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
     {
+
         <ul class="nav navbar-nav navbar-right">
             <li><a asp-area="" asp-controller="Users" asp-action="Search">Search Users</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="@User.GetUserId()"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name Account</a></li>
+            <li><a asp-area="Account" asp-controller="Profile" asp-action="Index" asp-route-id="@User.GetUserId()"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name Profile</a></li>
         </ul>
+       
     }
 
 

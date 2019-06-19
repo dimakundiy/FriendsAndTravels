@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FriendsAndTravel.Migrations
 {
     [DbContext(typeof(FriendsAndTravelDbContext))]
-    [Migration("20190616223809_sss")]
-    partial class sss
+    [Migration("20190619121442_000")]
+    partial class _000
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,6 +87,8 @@ namespace FriendsAndTravel.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsProfilePicture");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("Path")
                         .IsRequired()
@@ -254,8 +256,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "2f009327-d907-493d-a0c7-5c4df15552f4", ConcurrencyStamp = "534884a9-351a-4755-8101-ebde82ac1346", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "7165ed3b-807d-4258-852d-746f61afe21f", ConcurrencyStamp = "d5b44030-5a1e-496e-951b-059b7bad0db2", Name = "User", NormalizedName = "USER" }
+                        new { Id = "50fa0ee8-dc76-417a-a94a-5a6563ac5111", ConcurrencyStamp = "f30ffda5-e576-41cb-b164-555765fdb6a3", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "538be936-2395-4c0e-adcc-04bea3435b03", ConcurrencyStamp = "57f59a08-9247-47d6-9017-3d504f5d72e0", Name = "User", NormalizedName = "USER" }
                     );
                 });
 

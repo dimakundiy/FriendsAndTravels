@@ -1,5 +1,7 @@
 ﻿using FriendsAndTravel.BAL.DTO;
 using FriendsAndTravel.BAL.Infrastructure;
+using FriendsAndTravel.Data.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +14,6 @@ namespace FriendsAndTravel.BAL.Interfaces
         Task<OperationDetails> Create(UserDTO userDto);
         Task<bool> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);
+        
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FriendsAndTravel.BAL.Interfaces;
 using FriendsAndTravel.BAL.Services;
 using FriendsAndTravel.Data;
@@ -71,8 +72,9 @@ namespace FriendsAndTravel
                 });
 
 
-
-                services.AddMvc();
+            services.AddAutoMapper();
+         
+            services.AddMvc();
 
                 services.AddTransient<IUserService, UserService>();
                 services.AddTransient<IUnitOfWork, IdentityUnitOfWork>();

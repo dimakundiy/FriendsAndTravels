@@ -8,11 +8,12 @@ namespace FriendsAndTravel.Data.Entities
     public class Photo
     {
         public int Id { get; set; }
-
+        public string Name { get; set; }
         [Required]
         [MaxLength(DataConstants.MaxPhotoLength)]
         public string Path { get; set; }
 
+      
         public string UserId { get; set; }
 
         public User User { get; set; }

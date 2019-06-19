@@ -28,7 +28,6 @@ namespace FriendsAndTravel.Data.Entities
         public string Phone { get; set; }
         public string Role { get; set; }
         public IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
-
         public byte[] Avatar { get; set; }
 
         public ICollection<Post> Posts { get; set; } = new List<Post>();
@@ -38,5 +37,7 @@ namespace FriendsAndTravel.Data.Entities
         public ICollection<UserCategories> categories { get; set; } = new List<UserCategories>();
 
         public ICollection<EventUser> Events { get; set; } = new List<EventUser>();
+
+      
     }
 }
