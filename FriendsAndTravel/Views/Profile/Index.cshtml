@@ -1,14 +1,19 @@
 ﻿@model PersonViewModel
 @using FriendsAndTravel.Data.Entities
+@using FriendsAndTravel.Extensions
 @{
     ViewData["Title"] = "Profile";
 }
-<h3>Выберите файл для загрузки</h3>
-<form asp-action="AddFile" asp-controller="Profile" method="post" enctype="multipart/form-data">
-    <input type="file" name="uploadedFile" /><br>
-    <input type="submit" value="Загрузить" />
+<form asp-action="Create" asp-controller="Profile" method="post" enctype="multipart/form-data">
+
+    <p>
+        <label>Аватар</label>
+        <input name="Avatar" type="file" class="form-control" />
+    </p>
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
 </form>
-<img src="~/Files/1.jpg" alt="my img" />
 
 @*
         <h3>Все пользователи</h3>
@@ -22,7 +27,7 @@
                 }
             </div>
         }*@
-
+<img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="100" width="100" alt="ProfilePicture">
 <h2>UserName: @Model.UserName</h2>
 <h2>Email: @Model.Email</h2>
 <h2>Birthday: @Model.Birthday</h2>

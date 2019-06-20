@@ -254,8 +254,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "50fa0ee8-dc76-417a-a94a-5a6563ac5111", ConcurrencyStamp = "f30ffda5-e576-41cb-b164-555765fdb6a3", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "538be936-2395-4c0e-adcc-04bea3435b03", ConcurrencyStamp = "57f59a08-9247-47d6-9017-3d504f5d72e0", Name = "User", NormalizedName = "USER" }
+                        new { Id = "2535d614-67fe-4adb-9da7-af8c6f1762a5", ConcurrencyStamp = "ddefce1c-926c-4b46-8129-f2f5a6bc9195", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "d3430601-4a02-4d5b-adbe-c653be8760ef", ConcurrencyStamp = "a482e7ea-8a1a-4268-b9ab-a975413fd8b4", Name = "User", NormalizedName = "USER" }
                     );
                 });
 

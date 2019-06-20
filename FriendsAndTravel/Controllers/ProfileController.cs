@@ -41,13 +41,14 @@ namespace FriendsAndTravel.Controllers
             var model = new PersonViewModel
             {
             // Avatar =user.Avatar,
+            phot= user.Avatar,
                 UserName = user.UserName,
                 Email = user.Email,
                 Gender= user.Gender,
                 Location = user.Location,
                 Phone= user.PhoneNumber,
                 Birthday= user.Birthday
-             
+              
             };
             return View(model);
         }
@@ -108,11 +109,10 @@ namespace FriendsAndTravel.Controllers
                 }
                 // установка массива байтов
                 user.Avatar = imageData;
-            }
-            _context.Users.Add(user);
+            }         
             _context.SaveChanges();
 
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
     }
 }
