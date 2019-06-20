@@ -60,9 +60,14 @@ namespace FriendsAndTravel.Data.Repositories
             }
         }
 
-        public virtual void Insert(TEntity item)
+        public TEntity Add(TEntity entity)
         {
-            dbSet.Add(item);
+            if (entity == null)
+            {
+                throw new NotImplementedException();
+            }
+            dbSet.Add(entity);
+            return entity;
         }
 
         public virtual void Update(TEntity item)

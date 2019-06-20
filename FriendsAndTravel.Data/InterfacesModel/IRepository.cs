@@ -15,7 +15,7 @@ namespace FriendsAndTravel.Data.Interfaces
             Func<IQueryable<TEntity>,
             IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "");
-        void Insert(TEntity item);
+        TEntity Add(TEntity entity);
         void Update(TEntity item);
         void Delete(TEntity item);
         void SetStateModified(TEntity entity);

@@ -13,7 +13,7 @@ namespace FriendsAndTravel.Data
 {
    public class FriendsAndTravelDbContext : IdentityDbContext<User>
     {
-     
+        public DbSet<UserCategories> UserCategories { get; set; }
         public DbSet<Photo> Photos { get; set; }
 
         public DbSet<Post> Posts { get; set; }

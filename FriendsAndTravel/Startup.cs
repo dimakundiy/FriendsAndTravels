@@ -8,6 +8,7 @@ using FriendsAndTravel.BAL.Services;
 using FriendsAndTravel.Data;
 using FriendsAndTravel.Data.Entities;
 using FriendsAndTravel.Data.Interfaces;
+using FriendsAndTravel.Data.InterfacesModel;
 using FriendsAndTravel.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -75,12 +76,12 @@ namespace FriendsAndTravel
             services.AddAutoMapper();
          
             services.AddMvc();
-
-                services.AddTransient<IUserService, UserService>();
-                services.AddTransient<IUnitOfWork, IdentityUnitOfWork>();
-         
-
-            }
+            services.AddTransient<IAdminManager, AdminManager>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUnitOfWork, IdentityUnitOfWork>();
+            services.AddTransient<IUserCategoryRepository, UserCategoryRepository>();
+        }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             public void Configure(IApplicationBuilder app, IHostingEnvironment env)

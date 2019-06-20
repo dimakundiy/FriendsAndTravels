@@ -1,5 +1,6 @@
 ﻿using FriendsAndTravel.Data.Entities;
 using FriendsAndTravel.Data.Interfaces;
+using FriendsAndTravel.Data.InterfacesModel;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,19 +14,26 @@ namespace FriendsAndTravel.Data.Repositories
         public FriendsAndTravelDbContext Database { get; private set; }
         public UserManager<User> UserManager { get; private set; }
         public RoleManager<IdentityRole> RoleManager { get; private set; }
-              public SignInManager<User> SignInManager { get; private set; }
-       
+        public SignInManager<User> SignInManager { get; private set; }
+        public ICategoryRepository CategoryRepository { get; private set; }
+        public IUserCategoryRepository UserCategoryRepository { get; private set; }
+
         public IdentityUnitOfWork(
+
                                   FriendsAndTravelDbContext db,
                                   SignInManager<User> signInManager,
                                   UserManager<User> userManager,
-                                  RoleManager<IdentityRole> roleManager)
+                                  RoleManager<IdentityRole> roleManager,
+                                  ICategoryRepository categoryRepository,
+                                  IUserCategoryRepository userCategoryRepository
+                                  )
         {
             Database = db;
             UserManager = userManager;
             RoleManager = roleManager;
             SignInManager = signInManager;
-            
+            UserCategoryRepository = userCategoryRepository;
+            CategoryRepository = categoryRepository;
         }
 
 

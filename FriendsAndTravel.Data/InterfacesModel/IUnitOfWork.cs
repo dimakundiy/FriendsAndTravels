@@ -1,4 +1,5 @@
 ﻿using FriendsAndTravel.Data.Entities;
+using FriendsAndTravel.Data.InterfacesModel;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace FriendsAndTravel.Data.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        
+       
         UserManager<User> UserManager { get; }
         SignInManager<User> SignInManager { get; }
         RoleManager<IdentityRole> RoleManager { get; }
+        ICategoryRepository CategoryRepository { get; }
+        IUserCategoryRepository UserCategoryRepository { get; }
         Task SaveAsync();
     }
 }
