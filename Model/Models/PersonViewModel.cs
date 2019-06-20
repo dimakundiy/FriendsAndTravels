@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace FriendsAndTravel.Models
@@ -15,13 +16,14 @@ namespace FriendsAndTravel.Models
         public string Phone { get; set; }
         public Gender Gender { get; set; }
         public Location Location { get; set; }
-        public DateTime Birthday { get; set; }
+        public int Age { get; set; }
         public string Name { get; set; }
+       
         public IFormFile Avatar { get; set; }
-        
+         [Display(Name = "Upload a photo")]
         public byte[] phot { get; set; }
 
-        
-       
+        public string StatusMessage { get; set; }
+
     }
 }

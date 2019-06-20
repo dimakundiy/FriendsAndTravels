@@ -4,33 +4,24 @@
 @{
     ViewData["Title"] = "Profile";
 }
+<div class="pull-left">
+    <a asp-area="ProfileEdit" asp-controller="EditProfile" asp-action="Index" class="btn btn-primary"><span class="fa fa-user"></span>Edit Profile</a>
+</div>
+<img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
 <form asp-action="Create" asp-controller="Profile" method="post" enctype="multipart/form-data">
-
+    <div class="form-group">
+        <label asp-for="Avatar"></label>
+        <input asp-for="Avatar" class="form-control" />
+        <span asp-validation-for="Avatar" class="text-danger"></span>
+    </div>
     <p>
-        <label>Аватар</label>
-        <input name="Avatar" type="file" class="form-control" />
-    </p>
-    <p>
-        <input type="submit" value="Добавить" />
+        <input type="submit" value="Change" />
     </p>
 </form>
 
-@*
-        <h3>Все пользователи</h3>
-    @foreach (var p in Model)
-        {
-            <div>
-                <h4>@p.UserName</h4>
-                @if (p.Avatar != null)
-                {
-                    <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(p.Avatar))" />
-                }
-            </div>
-        }*@
-<img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="100" width="100" alt="ProfilePicture">
 <h2>UserName: @Model.UserName</h2>
 <h2>Email: @Model.Email</h2>
-<h2>Birthday: @Model.Birthday</h2>
+<h2>Age: @Model.Age</h2>
 <h2>Phone: @Model.Phone</h2>
 @*<h3>Выберите файл для загрузки</h3>
     <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">

@@ -21,10 +21,11 @@ namespace FriendsAndTravel.Models
         public string Username { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
         public DateTime Birthday { get; set; }
 
         [Required]
+        [RegularExpression(@"^\+[0-9]{11,12}$", ErrorMessage = "Wrong phone number")]
         public string Phone { get; set; }
         [Required]
         public string Location { get; set; }

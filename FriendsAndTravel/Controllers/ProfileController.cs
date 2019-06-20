@@ -40,26 +40,27 @@ namespace FriendsAndTravel.Controllers
             var user = await _userManager.GetUserAsync(User);
             var model = new PersonViewModel
             {
-            // Avatar =user.Avatar,
-            phot= user.Avatar,
+           
+                phot= user.Avatar,
                 UserName = user.UserName,
                 Email = user.Email,
                 Gender= user.Gender,
                 Location = user.Location,
                 Phone= user.PhoneNumber,
-                Birthday= user.Birthday
-              
+                Age = DateTime.Today.Year - user.Birthday.Year
+
             };
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> AddFile(IFormFileCollection uploads)
         {
             foreach (var uploadedFile in uploads)
             {
-                // путь к папке Files
+           
                 string path = "/Files/" + uploadedFile.FileName;
-                // сохраняем файл в папку Files в каталоге wwwroot
+               
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await uploadedFile.CopyToAsync(fileStream);
@@ -76,9 +77,8 @@ namespace FriendsAndTravel.Controllers
         {
             if (uploadedFile != null)
             {
-                // путь к папке Files
                 string path = "/Files/" + uploadedFile.FileName;
-                // сохраняем файл в папку Files в каталоге wwwroot
+             
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await uploadedFile.CopyToAsync(fileStream);
@@ -102,12 +102,12 @@ namespace FriendsAndTravel.Controllers
             if (pvm.Avatar != null)
             {
                 byte[] imageData = null;
-                // считываем переданный файл в массив байтов
+              
                 using (var binaryReader = new BinaryReader(pvm.Avatar.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)pvm.Avatar.Length);
                 }
-                // установка массива байтов
+            
                 user.Avatar = imageData;
             }         
             _context.SaveChanges();
