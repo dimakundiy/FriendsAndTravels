@@ -40,6 +40,7 @@ namespace FriendsAndTravel.Controllers
             {
                 UserName = user.UserName,
                 Email = user.Email,
+                Location=user.Location,
                 Phone = user.PhoneNumber,
                 StatusMessage = StatusMessage
             };
@@ -57,15 +58,24 @@ namespace FriendsAndTravel.Controllers
 
             var user = await _userManager.GetUserAsync(User);
 
-            var email = user.Email;
-            if (model.Email != email)
+            var userName = user.UserName;
+            if (model.UserName != userName)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
-                if (!setEmailResult.Succeeded)
+                var setUserNAmeResult = await _userManager.SetUserNameAsync(user, model.UserName);
+                if (!setUserNAmeResult.Succeeded)
                 {
-                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                    throw new ApplicationException($"Unexpected error occurred setting User Name for user with ID '{user.Id}'.");
                 }
             }
+         //   var location = user.Location;
+          //  if (model.Location != location)
+          //  {
+          //     var setEmailResult = await _userManager.User;
+             //   if (!setEmailResult.Succeeded)
+              //  {
+                //    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+               // }
+          //  }
 
             var phoneNumber = user.PhoneNumber;
             if (model.Phone != phoneNumber)
@@ -77,7 +87,7 @@ namespace FriendsAndTravel.Controllers
                 }
             }
             StatusMessage = "Your profile has been updated";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> ChangePassword()

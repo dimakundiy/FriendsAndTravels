@@ -5,7 +5,7 @@
     ViewData["Title"] = "Profile";
 }
 <div class="pull-left">
-    <a asp-area="ProfileEdit" asp-controller="EditProfile" asp-action="Index" class="btn btn-primary"><span class="fa fa-user"></span>Edit Profile</a>
+    <a asp-controller="EditProfile" asp-action="Index" class="btn btn-primary"><span class="fa fa-user"></span>Edit Profile</a>
 </div>
 <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
 <form asp-action="Create" asp-controller="Profile" method="post" enctype="multipart/form-data">

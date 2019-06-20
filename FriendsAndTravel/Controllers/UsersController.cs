@@ -36,7 +36,7 @@ namespace FriendsAndTravel.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    user = new User { Email = model.Email, UserName = model.Username, Birthday = model.Birthday };
+                    user = new User { Email = model.Email, UserName = model.Username, Birthday = model.Birthday, Role="user" };
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -86,6 +86,7 @@ namespace FriendsAndTravel.Controllers
                     user.Email = model.Email;
                     user.UserName = model.Username;
                     user.PhoneNumber = model.Phone;
+
                   //  user.Location = model.Location;
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
