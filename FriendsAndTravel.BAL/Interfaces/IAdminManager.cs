@@ -3,6 +3,7 @@ using FriendsAndTravel.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FriendsAndTravel.BAL.Interfaces
 {
@@ -11,5 +12,6 @@ namespace FriendsAndTravel.BAL.Interfaces
         List<User> Users();
         List<Categories> Categories();
         OperationDetails AddCategory(string title);
+        Task<OperationDetails> Delete(int id);
     }
 }

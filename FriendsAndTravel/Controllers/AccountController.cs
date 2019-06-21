@@ -88,10 +88,15 @@ namespace FriendsAndTravel.Controllers
                 };  
                 OperationDetails operationDetails = await userService.Create(userDto);
                
-                if (operationDetails.Succedeed)
+                if (operationDetails.Succedeed) { 
+
                     return RedirectToAction("Index", "Home");
-                else
+
+                }
+                else { 
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
+                
+}
             }
             return View(model);
         }
