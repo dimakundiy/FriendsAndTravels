@@ -81,6 +81,8 @@ namespace FriendsAndTravel
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUnitOfWork, IdentityUnitOfWork>();
             services.AddTransient<IUserCategoryRepository, UserCategoryRepository>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IPhotoService, PhotoService>();
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

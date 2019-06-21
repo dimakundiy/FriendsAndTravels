@@ -38,6 +38,6 @@ namespace FriendsAndTravel.Data.Entities
 
         public ICollection<EventUser> Events { get; set; } = new List<EventUser>();
 
-      
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

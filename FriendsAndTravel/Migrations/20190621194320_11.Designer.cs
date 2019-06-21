@@ -4,14 +4,16 @@ using FriendsAndTravel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FriendsAndTravel.Migrations
 {
     [DbContext(typeof(FriendsAndTravelDbContext))]
-    partial class FriendsAndTravelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190621194320_11")]
+    partial class _11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,9 +90,7 @@ namespace FriendsAndTravel.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Path");
-
-                    b.Property<byte[]>("PhotoAsBytes")
+                    b.Property<string>("Path")
                         .IsRequired()
                         .HasMaxLength(5242880);
 
@@ -256,8 +256,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "e80f1f24-baf0-4eda-a628-18f4828a0c80", ConcurrencyStamp = "26b50b3c-3c69-4da3-8dbb-55e8bc442e7e", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "df4f96e0-6d8e-4fb9-9c21-66c4a0df55e8", ConcurrencyStamp = "56804dc8-1576-4c7d-b065-75f04be60e81", Name = "User", NormalizedName = "USER" }
+                        new { Id = "826652c8-a55a-45c6-8b25-b8413885cf76", ConcurrencyStamp = "103745d0-21f7-41a6-bfd5-0cbf290c3cb6", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "ec0afcdc-5cc3-464b-ad58-1a9864394fd8", ConcurrencyStamp = "86f676f6-b4e8-4360-9dc2-8de68d7333de", Name = "User", NormalizedName = "USER" }
                     );
                 });
 

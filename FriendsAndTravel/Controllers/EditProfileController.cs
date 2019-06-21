@@ -1,8 +1,11 @@
-﻿using FriendsAndTravel.Data.Entities;
+﻿using FriendsAndTravel.BAL.Infrastructure;
+using FriendsAndTravel.BAL.Interfaces;
+using FriendsAndTravel.Data.Entities;
 using FriendsAndTravel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Model.DTO;
 using Model.Models;
 using System;
 using System.Collections.Generic;
@@ -16,16 +19,16 @@ namespace FriendsAndTravel.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger _logger;
-  
+        private readonly ICategoryService categoryService;
         public EditProfileController(
           UserManager<User> userManager,
           SignInManager<User> signInManager,
-          ILogger<EditProfileController> logger)
+          ILogger<EditProfileController> logger, ICategoryService _categoryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-          
+            categoryService = _categoryService;
         }
 
         [TempData]
@@ -190,6 +193,34 @@ namespace FriendsAndTravel.Controllers
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+        }
+        public IActionResult ChooseCategories(string id)
+        {
+            List<string> selected_categories = new List<string>();
+            foreach (var item in categoryService.UserCategories(id))
+            {
+                selected_categories.Add(item.Tag);
+            }
+            ChooseCategoryModel chooseCategoryModel = new ChooseCategoryModel
+            {
+                SelectedCategories = selected_categories,
+                Categories = categoryService.Categories()
+            };
+            return View(chooseCategoryModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChooseCategories(ChooseCategoryModel model)
+        {
+            var p = await _userManager.FindByNameAsync(User.Identity.Name);
+            UCategoriesDTO userCategoryDTO = new UCategoriesDTO
+            {
+                Categories = model.SelectedCategories,
+                Id = p.Id
+            };
+            OperationDetails result = await categoryService.AddUserCategories(userCategoryDTO);
+
+            return RedirectToAction("Index", "Profile");
         }
     }
 }

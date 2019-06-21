@@ -1,4 +1,5 @@
 ﻿using FriendsAndTravel.Data.Entities.Enums;
+using Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,7 @@ namespace FriendsAndTravel.Data.Entities
         public User User { get; set; }
 
         public Feeling Feeling { get; set; }
+        public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
 
-        
     }
 }

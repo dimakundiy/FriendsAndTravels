@@ -17,10 +17,7 @@
         {
             <tr>
                 <td>
-            <li>
-                
                 <label for="checkbox @item.Id">@item.Tag</label>
-            </li>
             </td>
             <td>
                 <form  asp-controller="Admin" asp-action="Delete" asp-route-id="@item.Id" method="post">
