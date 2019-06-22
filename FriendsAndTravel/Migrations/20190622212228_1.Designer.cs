@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FriendsAndTravel.Migrations
 {
     [DbContext(typeof(FriendsAndTravelDbContext))]
-    [Migration("20190620081113_1")]
+    [Migration("20190622212228_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,7 +90,9 @@ namespace FriendsAndTravel.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Path")
+                    b.Property<string>("Path");
+
+                    b.Property<byte[]>("PhotoAsBytes")
                         .IsRequired()
                         .HasMaxLength(5242880);
 
@@ -256,8 +258,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "2535d614-67fe-4adb-9da7-af8c6f1762a5", ConcurrencyStamp = "ddefce1c-926c-4b46-8129-f2f5a6bc9195", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "d3430601-4a02-4d5b-adbe-c653be8760ef", ConcurrencyStamp = "a482e7ea-8a1a-4268-b9ab-a975413fd8b4", Name = "User", NormalizedName = "USER" }
+                        new { Id = "f283118f-8f9d-457a-9b48-7160c2a9bfb1", ConcurrencyStamp = "bd9fcd4e-2d75-4492-8216-8108d99852ef", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "b5d705bc-4d6a-4968-9a13-61cf01b7d4c8", ConcurrencyStamp = "57625fc5-f2e2-4cb5-a040-d89aa3c27058", Name = "User", NormalizedName = "USER" }
                     );
                 });
 
@@ -385,6 +387,30 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("UserToken");
                 });
 
+            modelBuilder.Entity("Model.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("PostId");
+
+                    b.Property<string>("Text")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Model.Entities.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -510,6 +536,18 @@ namespace FriendsAndTravel.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Model.Entities.Comment", b =>
+                {
+                    b.HasOne("FriendsAndTravel.Data.Entities.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FriendsAndTravel.Data.Entities.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

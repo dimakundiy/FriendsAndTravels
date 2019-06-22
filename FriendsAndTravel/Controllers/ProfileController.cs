@@ -114,6 +114,7 @@ namespace FriendsAndTravel.Controllers
 
             return RedirectToAction("Index");
         }
+
     }
 }
 

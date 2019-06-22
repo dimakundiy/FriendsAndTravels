@@ -8,6 +8,7 @@ using FriendsAndTravel.Data.Configurations;
 using Microsoft.AspNetCore.Identity;
 
 using FriendsAndTravel.BAL.DTO;
+using Model.Entities;
 
 namespace FriendsAndTravel.Data
 {
@@ -17,6 +18,8 @@ namespace FriendsAndTravel.Data
         public DbSet<Photo> Photos { get; set; }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
 
         public DbSet<UserFriend> UserFriend { get; set; }
             
@@ -36,6 +39,7 @@ namespace FriendsAndTravel.Data
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UserCategoriesConfiguration());
             builder.ApplyConfiguration(new EventUserConfiguration());
+            builder.ApplyConfiguration(new PostConfiguration());
             base.OnModelCreating(builder);
 
 

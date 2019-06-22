@@ -13,7 +13,7 @@
             </li>
         </ul>
     </form>
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    @if (User.Identity.IsAuthenticated&& User.IsInRole("Admin"))
     {
     <ul class="nav navbar-nav navbar-right">
        
@@ -22,19 +22,16 @@
         <li><a asp-area="Users" asp-controller="Users" asp-action="Index">Manage Users</a></li>
         <li><a asp-area="" asp-controller="Users" asp-action="Search">Search Users</a></li>
         <li><a asp-area="Account" asp-controller="Profile" asp-action="Index" asp-route-id="@User.GetUserId()"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name Profile</a></li>
-    </ul>
+    </ul>   
     }
     else
     {
-        @if (User.Identity.IsAuthenticated)
-        {
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a asp-area="" asp-controller="Users" asp-action="Search">Search Users</a></li>
                 <li><a asp-area="Account" asp-controller="Profile" asp-action="Index" asp-route-id="@User.GetUserId()"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name Profile</a></li>
             </ul>
 
-        }
     }
 
 }

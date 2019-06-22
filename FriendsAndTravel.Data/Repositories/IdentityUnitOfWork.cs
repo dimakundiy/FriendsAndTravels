@@ -17,6 +17,7 @@ namespace FriendsAndTravel.Data.Repositories
         public SignInManager<User> SignInManager { get; private set; }
         public ICategoryRepository CategoryRepository { get; private set; }
         public IUserCategoryRepository UserCategoryRepository { get; private set; }
+     
 
         public IdentityUnitOfWork(
 
@@ -26,6 +27,7 @@ namespace FriendsAndTravel.Data.Repositories
                                   RoleManager<IdentityRole> roleManager,
                                   ICategoryRepository categoryRepository,
                                   IUserCategoryRepository userCategoryRepository
+                              
                                   )
         {
             Database = db;
@@ -34,6 +36,7 @@ namespace FriendsAndTravel.Data.Repositories
             SignInManager = signInManager;
             UserCategoryRepository = userCategoryRepository;
             CategoryRepository = categoryRepository;
+            
         }
 
 

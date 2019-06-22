@@ -256,8 +256,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "e80f1f24-baf0-4eda-a628-18f4828a0c80", ConcurrencyStamp = "26b50b3c-3c69-4da3-8dbb-55e8bc442e7e", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "df4f96e0-6d8e-4fb9-9c21-66c4a0df55e8", ConcurrencyStamp = "56804dc8-1576-4c7d-b065-75f04be60e81", Name = "User", NormalizedName = "USER" }
+                        new { Id = "f283118f-8f9d-457a-9b48-7160c2a9bfb1", ConcurrencyStamp = "bd9fcd4e-2d75-4492-8216-8108d99852ef", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "b5d705bc-4d6a-4968-9a13-61cf01b7d4c8", ConcurrencyStamp = "57625fc5-f2e2-4cb5-a040-d89aa3c27058", Name = "User", NormalizedName = "USER" }
                     );
                 });
 
@@ -406,7 +406,7 @@ namespace FriendsAndTravel.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Model.Entities.Location", b =>
