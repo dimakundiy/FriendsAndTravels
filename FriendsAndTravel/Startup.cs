@@ -83,7 +83,7 @@ namespace FriendsAndTravel
             services.AddTransient<IUserCategoryRepository, UserCategoryRepository>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IPhotoService, PhotoService>();
-           
+            services.AddTransient<IPostService, PostService>();
            
         }
 

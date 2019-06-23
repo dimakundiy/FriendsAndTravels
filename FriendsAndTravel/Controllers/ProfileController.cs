@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FriendsAndTravel.BAL.DTO;
+using FriendsAndTravel.BAL.Interfaces;
 using FriendsAndTravel.BAL.Services;
 using FriendsAndTravel.Data;
 using FriendsAndTravel.Data.Entities;
@@ -25,9 +26,11 @@ namespace FriendsAndTravel.Controllers
         IHostingEnvironment _appEnvironment;
         UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        private readonly IPostService _postService;
        
-        public ProfileController(FriendsAndTravelDbContext context, IHostingEnvironment appEnvironment, IMapper mapper,  UserManager<User> userManager)
+        public ProfileController(FriendsAndTravelDbContext context, IHostingEnvironment appEnvironment, IMapper mapper,  UserManager<User> userManager, IPostService postService)
         {
+            _postService = postService;
             _userManager = userManager;
             _mapper = mapper;
             _context = context;
@@ -40,15 +43,16 @@ namespace FriendsAndTravel.Controllers
             var user = await _userManager.GetUserAsync(User);
             var model = new PersonViewModel
             {
-           
-                phot= user.Avatar,
+
+                phot = user.Avatar,
                 UserName = user.UserName,
                 Email = user.Email,
-                Gender= user.Gender,
+                Gender = user.Gender,
                 Location = user.Location,
-                Phone= user.PhoneNumber,
-                Age = DateTime.Today.Year - user.Birthday.Year
-
+                Phone = user.PhoneNumber,
+                Age = DateTime.Today.Year - user.Birthday.Year,
+              //  Posts = _postService.PostsByUserId(user.Id, 1, 5)
+                
             };
             return View(model);
         }

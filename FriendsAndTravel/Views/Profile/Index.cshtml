@@ -4,9 +4,6 @@
 @{
     ViewData["Title"] = "Profile";
 }
-<div class="pull-left">
-    <a asp-controller="EditProfile" asp-action="Index" class="btn btn-primary"><span class="fa fa-user"></span>Edit Profile</a>
-</div>
 <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
 <form asp-action="Create" asp-controller="Profile" method="post" enctype="multipart/form-data">
     <div class="form-group">
@@ -38,7 +35,7 @@
 
     <div class="col-sm-3 well text-center">
         <div class="well">
-            <p><a asp-controller="Prifile" asp-action="Index" asp-route-id="@Model.userId"><strong>@Model.UserName</strong></a></p>
+            <p><a asp-controller="EditProfile" asp-action="Index" asp-route-id="@Model.userId"><strong>@Model.UserName</strong></a></p>
             <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="100" width="100" alt="ProfilePicture">
         </div>
         <div class="well">
@@ -74,7 +71,7 @@
                     <img src="@post.UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="55" width="55" alt="Avatar">
                 </div>
                 <div class="col-sm-10 text-left">
-                    <div class="row"><a asp-controller="Users" asp-action="AccountDetails" asp-route-id="@post.UserId"><strong>@post.UserFullName</strong></a> is feeling @post.Feeling.ToString()</div>
+                    <div class="row"><a asp-controller="Profile" asp-action="Index" asp-route-id="@post.UserId"><strong>@post.UserFullName</strong></a> is feeling @post.Feeling.ToString()</div>
                     <div class="row"><small>@post.Date.ToShortDateString()</small></div>
                 </div>
             </div>

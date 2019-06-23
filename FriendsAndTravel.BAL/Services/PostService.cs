@@ -94,7 +94,7 @@ namespace FriendsAndTravel.BAL.Services
         {
             var posts = this.db
                 .Posts
-                .Where(p => p.UserId == userId)
+               .Where(p => p.UserId == userId)
                 .Include(p => p.Comments)
                 .ThenInclude(p => p.User)
                 .ProjectTo<PostModel>()
