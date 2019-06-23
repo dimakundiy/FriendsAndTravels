@@ -1,6 +1,9 @@
-﻿using FriendsAndTravel.Data.Entities;
+﻿using AutoMapper;
+using FriendsAndTravel.Data.CustomDataStructures;
+using FriendsAndTravel.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Model.Entities;
+using Model.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,6 +27,12 @@ namespace FriendsAndTravel.Models
         public byte[] phot { get; set; }
 
         public string StatusMessage { get; set; }
-
+        public PaginatedList<PostModel> Posts { get; set; }
+        public void ConfigureMapping(Profile profile)
+        {
+            profile.CreateMap<User, PersonViewModel>()
+                .ForMember(u => u.Posts, cfg => cfg.Ignore());
+               
+        }
     }
 }
