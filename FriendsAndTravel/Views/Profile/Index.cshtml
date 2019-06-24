@@ -4,44 +4,17 @@
 @{
     ViewData["Title"] = "Profile";
 }
-<img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
-<form asp-action="Create" asp-controller="Profile" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="Avatar"></label>
-        <input asp-for="Avatar" class="form-control" />
-        <span asp-validation-for="Avatar" class="text-danger"></span>
-    </div>
-    <p>
-        <input type="submit" value="Change" />
-    </p>
-</form>
 
-<h2>UserName: @Model.UserName</h2>
-<h2>Email: @Model.Email</h2>
-<h2>Age: @Model.Age</h2>
-<h2>Phone: @Model.Phone</h2>
-@*<h3>Выберите файл для загрузки</h3>
-    <form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
-        <input type="file" name="uploadedFile" /><br>
-        <input type="submit" value="Загрузить" />
-    </form>
-
-    <h3>Все файлы</h3>
-    @foreach(var f in Model)
-    {
-        <p><img src="@Url.Content(f.Path)"></p>
-    }*@
 <div class="row">
 
     <div class="col-sm-3 well text-center">
         <div class="well">
             <p><a asp-controller="EditProfile" asp-action="Index" asp-route-id="@Model.userId"><strong>@Model.UserName</strong></a></p>
-            <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="100" width="100" alt="ProfilePicture">
+            <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
         </div>
         <div class="well">
             <p><a href="#"><strong>Interests</strong></a></p>
-            <p>
-                @*  @Html.Partial("_UserInterests", Model.Interests)*@
+            
             </p>
         </div>
     </div>

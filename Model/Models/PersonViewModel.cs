@@ -16,10 +16,11 @@ namespace FriendsAndTravel.Models
         public int userId { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
+        public int Age { get; set; }
         public string Phone { get; set; }
         public Gender Gender { get; set; }
         public Location Location { get; set; }
-        public int Age { get; set; }
+     
         public string Name { get; set; }
        
         public IFormFile Avatar { get; set; }
@@ -27,7 +28,8 @@ namespace FriendsAndTravel.Models
         public byte[] phot { get; set; }
 
         public string StatusMessage { get; set; }
-        public PaginatedList<PostModel> Posts { get; set; }
+
+        public PaginatedList<PostModel> Posts { get; set; } = null;
         public void ConfigureMapping(Profile profile)
         {
             profile.CreateMap<User, PersonViewModel>()

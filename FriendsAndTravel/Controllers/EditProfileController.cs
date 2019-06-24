@@ -1,5 +1,6 @@
 ﻿using FriendsAndTravel.BAL.Infrastructure;
 using FriendsAndTravel.BAL.Interfaces;
+using FriendsAndTravel.Data;
 using FriendsAndTravel.Data.Entities;
 using FriendsAndTravel.Models;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +10,7 @@ using Model.DTO;
 using Model.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +18,7 @@ namespace FriendsAndTravel.Controllers
 {
     public class EditProfileController: Controller
     {
+        FriendsAndTravelDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger _logger;
@@ -23,8 +26,9 @@ namespace FriendsAndTravel.Controllers
         public EditProfileController(
           UserManager<User> userManager,
           SignInManager<User> signInManager,
-          ILogger<EditProfileController> logger, ICategoryService _categoryService)
+          ILogger<EditProfileController> logger, ICategoryService _categoryService, FriendsAndTravelDbContext context)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -45,6 +49,8 @@ namespace FriendsAndTravel.Controllers
                 Email = user.Email,
                 Location=user.Location,
                 Phone = user.PhoneNumber,
+                Age = DateTime.Today.Year - user.Birthday.Year,
+                
                 StatusMessage = StatusMessage
             };
             return View(model);
@@ -194,19 +200,42 @@ namespace FriendsAndTravel.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+        public IActionResult ChangeAvatar()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangeAvatar(PersonViewModel pvm)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (pvm.Avatar != null)
+            {
+                byte[] imageData = null;
+
+                using (var binaryReader = new BinaryReader(pvm.Avatar.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)pvm.Avatar.Length);
+                }
+
+                user.Avatar = imageData;
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index","Profile");
+        }
         public IActionResult ChooseCategories(string id)
         {
             List<string> selected_categories = new List<string>();
-            foreach (var item in categoryService.UserCategories(id))
+            foreach (var item in categoryService.UserCategories(User.Identity.Name))
             {
                 selected_categories.Add(item.Tag);
             }
-            ChooseCategoryModel chooseCategoryModel = new ChooseCategoryModel
+            ChooseCategoryModel chooseCategoriesViewModel = new ChooseCategoryModel
             {
                 SelectedCategories = selected_categories,
                 Categories = categoryService.Categories()
             };
-            return View(chooseCategoryModel);
+            return View(chooseCategoriesViewModel);
         }
 
         [HttpPost]
@@ -222,5 +251,6 @@ namespace FriendsAndTravel.Controllers
 
             return RedirectToAction("Index", "Profile");
         }
+
     }
 }

@@ -14,8 +14,9 @@ namespace FriendsAndTravel.Views.ProfileEdit
         public static string Index => "Index";
         public static string ChooseCategories => "ChooseCategories";
         public static string ChangePassword => "ChangePassword";
+        public static string ChangeAvatar => "ChangeAvatar";
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
-       
+        public static string ChangeAvatarNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangeAvatar);
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
         public static string ChooseCategoriesNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChooseCategories);
         public static string PageNavClass(ViewContext viewContext, string page)

@@ -18,7 +18,7 @@ namespace FriendsAndTravel.BAL.Services
         {
             Database = db;
         }
-
+        public List<Categories> Categories() => Database.CategoryRepository.GetAll().ToList();
         public async Task<OperationDetails> AddUserCategories(UCategoriesDTO model)
         {
             foreach (var item in Database.UserCategoryRepository.FindById(model.Id))
@@ -47,10 +47,6 @@ namespace FriendsAndTravel.BAL.Services
             return Database.CategoryRepository.Categories(id);
         }
 
-        public List<Categories> Categories()
-        {
-            return Database.CategoryRepository.GetAll().ToList();
-        }
 
         
     }

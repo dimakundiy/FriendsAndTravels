@@ -1,0 +1,22 @@
+﻿@using FriendsAndTravel.Models
+@using Model.Models
+@using FriendsAndTravel.Extensions
+@model PersonViewModel
+@{
+    ViewData["Title"] = "Change Avatar";
+
+}
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="ChangeAvatar" asp-controller="EditProfile" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Avatar"></label>
+                <input asp-for="Avatar" class="form-control" />
+                <span asp-validation-for="Avatar" class="text-danger"></span>
+            </div>
+            <p>
+                <input type="submit" value="Change" />
+            </p>
+        </form>
+        </div>
+</div>

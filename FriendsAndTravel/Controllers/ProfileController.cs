@@ -50,7 +50,7 @@ namespace FriendsAndTravel.Controllers
                 Gender = user.Gender,
                 Location = user.Location,
                 Phone = user.PhoneNumber,
-                Age = DateTime.Today.Year - user.Birthday.Year,
+                Age = DateTime.Today.Year - user.Birthday.Year
               //  Posts = _postService.PostsByUserId(user.Id, 1, 5)
                 
             };
@@ -94,30 +94,9 @@ namespace FriendsAndTravel.Controllers
 
             return RedirectToAction("Index");
         }
-        public IActionResult Create()
-        {
-            return View(_context.Users.ToList());
-        }
+       
 
-        [HttpPost]
-        public async Task<IActionResult> Create(PersonViewModel pvm)
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (pvm.Avatar != null)
-            {
-                byte[] imageData = null;
-              
-                using (var binaryReader = new BinaryReader(pvm.Avatar.OpenReadStream()))
-                {
-                    imageData = binaryReader.ReadBytes((int)pvm.Avatar.Length);
-                }
-            
-                user.Avatar = imageData;
-            }         
-            _context.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
+        
 
     }
 }
