@@ -226,16 +226,16 @@ namespace FriendsAndTravel.Controllers
         public IActionResult ChooseCategories(string id)
         {
             List<string> selected_categories = new List<string>();
-            foreach (var item in categoryService.UserCategories(User.Identity.Name))
+            foreach (var item in categoryService.UserCategories(id))
             {
                 selected_categories.Add(item.Tag);
             }
-            ChooseCategoryModel chooseCategoriesViewModel = new ChooseCategoryModel
+            ChooseCategoryModel chooseCategoryModel = new ChooseCategoryModel
             {
                 SelectedCategories = selected_categories,
                 Categories = categoryService.Categories()
             };
-            return View(chooseCategoriesViewModel);
+            return View(chooseCategoryModel);
         }
 
         [HttpPost]

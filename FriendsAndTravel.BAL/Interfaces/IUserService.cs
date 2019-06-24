@@ -14,6 +14,6 @@ namespace FriendsAndTravel.BAL.Interfaces
         Task<OperationDetails> Create(UserDTO userDto);
         Task<bool> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);
-        
+       
     }
 }

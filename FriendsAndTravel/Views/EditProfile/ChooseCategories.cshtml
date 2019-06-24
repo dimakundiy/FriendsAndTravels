@@ -5,8 +5,9 @@
 }
 
 <link href="~/css/CheckBox.css" rel="stylesheet" />
-<form asp-action="ChooseCategories" method="post">
-    <table class="table">
+@using (Html.BeginForm("ChooseCategories", "EditProfile"))
+{
+    <ul class="ks-cboxtags">
         @foreach (var item in Model.Categories)
         {
             <li>
@@ -14,7 +15,6 @@
                 <label for="@item.Id">@item.Tag</label>
             </li>
         }
-    </table>
+    </ul>
     <input type="submit" name="Submit" value="Choose" />
-
-</form>
+}

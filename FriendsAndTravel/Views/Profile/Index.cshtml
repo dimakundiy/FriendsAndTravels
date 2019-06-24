@@ -13,8 +13,8 @@
             <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
         </div>
         <div class="well">
-            <p><a href="#"><strong>Interests</strong></a></p>
-            
+            @Html.ActionLink("Interests", "ChooseCategories", "EditProfile", new { id = Model.userId })
+
             </p>
         </div>
     </div>
