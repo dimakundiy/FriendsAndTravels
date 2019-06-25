@@ -71,7 +71,7 @@ namespace FriendsAndTravel
                     options.AccessDeniedPath = "//Account/AccessDenied";
                     options.SlidingExpiration = true;
                 });
-
+             
 
             services.AddAutoMapper();
          
@@ -84,7 +84,8 @@ namespace FriendsAndTravel
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPostService, PostService>();
-           
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

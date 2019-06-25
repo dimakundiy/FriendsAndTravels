@@ -15,7 +15,7 @@ namespace FriendsAndTravel.Data.Configurations
 
             builder
                 .HasOne(ui => ui.User)
-                .WithMany(u => u.categories)
+                .WithMany(u => u.Categories)
                 .HasForeignKey(ui => ui.UserId);
 
             builder

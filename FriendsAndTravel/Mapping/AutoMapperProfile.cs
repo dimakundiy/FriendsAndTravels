@@ -4,20 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Threading.Tasks;
 
-namespace FriendsAndTravel.BAL.Mapping
+namespace FriendsAndTravel.Mapping
 {
     public class AutoMapperProfile : Profile
     {
-      
+        //this.CreateMap<Camera, CameraListModel>();
 
         private readonly string[] Assemblies = new[]
         {
             "FriendsAndTravel",
-            "FriendsAndTravel.Data",
             "FriendsAndTravel.BAL",
-            "FriendsAndTravel.Common"
+            "FriendsAndTravel.Common",
+            "FriendsAndTravel.Data",
+            "Model"
         };
 
         public AutoMapperProfile()

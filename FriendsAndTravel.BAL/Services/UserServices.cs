@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FriendsAndTravel.Data.Interfaces;
 using Model.Entities;
+using FriendsAndTravel.Data.InterfacesModel;
 
 namespace FriendsAndTravel.BAL.Services
 {
@@ -22,7 +23,19 @@ namespace FriendsAndTravel.BAL.Services
         {
             Database = uow;
         }
-
+        public  async Task<UserDTO> FindProfileByUserName(string UserName)
+        {
+            User user = Database.userProfileRepository.FindByUserName(UserName);
+            UserDTO profile = new UserDTO()
+            {
+                GetUser = user
+            };
+            return profile;
+        }
+        public User GetUserByName(string user)
+        {
+            return Database.userProfileRepository.FindByUserName(user);
+        }
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
             User user = await Database.UserManager.FindByEmailAsync(userDto.Email);

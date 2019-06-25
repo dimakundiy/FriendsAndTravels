@@ -7,8 +7,8 @@ namespace Model.Models
 {
     public class ChooseCategoryModel
     {
-        public List<string> SelectedCategories { get; set; }
+        public  List<string> SelectedCategories { get; set; }
         public List<Categories> Categories { get; set; }
-       
+        public List<UserCategories> UCategories { get; set; }
     }
 }

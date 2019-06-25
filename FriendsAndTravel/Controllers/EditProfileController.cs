@@ -1,4 +1,5 @@
-﻿using FriendsAndTravel.BAL.Infrastructure;
+﻿using FriendsAndTravel.BAL.DTO;
+using FriendsAndTravel.BAL.Infrastructure;
 using FriendsAndTravel.BAL.Interfaces;
 using FriendsAndTravel.Data;
 using FriendsAndTravel.Data.Entities;
@@ -23,16 +24,19 @@ namespace FriendsAndTravel.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger _logger;
         private readonly ICategoryService categoryService;
+        private readonly IUserService userService;
+
         public EditProfileController(
           UserManager<User> userManager,
           SignInManager<User> signInManager,
-          ILogger<EditProfileController> logger, ICategoryService _categoryService, FriendsAndTravelDbContext context)
+          ILogger<EditProfileController> logger, ICategoryService _categoryService, FriendsAndTravelDbContext context, IUserService _userService)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             categoryService = _categoryService;
+            userService = _userService;
         }
 
         [TempData]
@@ -241,11 +245,11 @@ namespace FriendsAndTravel.Controllers
         [HttpPost]
         public async Task<IActionResult> ChooseCategories(ChooseCategoryModel model)
         {
-            var p = await _userManager.FindByNameAsync(User.Identity.Name);
+           UserDTO p= await userService.FindProfileByUserName(User.Identity.Name);
             UCategoriesDTO userCategoryDTO = new UCategoriesDTO
             {
                 Categories = model.SelectedCategories,
-                Id = p.Id
+                Id = p.GetUser.Id
             };
             OperationDetails result = await categoryService.AddUserCategories(userCategoryDTO);
 

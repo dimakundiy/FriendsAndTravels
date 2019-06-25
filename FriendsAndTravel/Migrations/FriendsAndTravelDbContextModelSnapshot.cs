@@ -256,8 +256,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "f283118f-8f9d-457a-9b48-7160c2a9bfb1", ConcurrencyStamp = "bd9fcd4e-2d75-4492-8216-8108d99852ef", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "b5d705bc-4d6a-4968-9a13-61cf01b7d4c8", ConcurrencyStamp = "57625fc5-f2e2-4cb5-a040-d89aa3c27058", Name = "User", NormalizedName = "USER" }
+                        new { Id = "c3999cb1-0ff1-4dfc-ba2a-158e93b944e6", ConcurrencyStamp = "d11f54d3-30c8-426f-8a9f-35a8a1ee0efa", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "26aef1ab-278a-457a-b2a8-30616bd6e471", ConcurrencyStamp = "c0b44dab-8e2a-4735-a670-cfafd4bd81e5", Name = "User", NormalizedName = "USER" }
                     );
                 });
 
@@ -419,7 +419,7 @@ namespace FriendsAndTravel.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Location");
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("FriendsAndTravel.Data.Entities.Event", b =>

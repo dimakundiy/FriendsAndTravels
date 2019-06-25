@@ -9,12 +9,21 @@
 
     <div class="col-sm-3 well text-center">
         <div class="well">
-            <p><a asp-controller="EditProfile" asp-action="Index" asp-route-id="@Model.userId"><strong>@Model.UserName</strong></a></p>
-            <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
+            <p><a asp-controller="EditProfile" asp-action="Index" asp-route-id="@Model.Id"><strong>@Model.UserName</strong></a></p>
+            @if (Model.phot ==null)
+
+            {
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+            }
+            else
+            {
+                <img src="@Model.phot.ToRenderablePictureString()" class="img-circle" height="200" width="200" alt="ProfilePicture">
+            }
+
         </div>
         <div class="well">
-            @Html.ActionLink("Interests", "ChooseCategories", "EditProfile", new { id = Model.userId })
-
+          
+            @Html.ActionLink("Interests", "ChooseCategories", "EditProfile", new { id = Model.Id })
             </p>
         </div>
     </div>
@@ -38,68 +47,59 @@
             @foreach (var post in Model.Posts)
             {
 
-        <div class="well">
-            <div class="row">
-                <div class="col-sm-2">
-                    <img src="@post.UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="55" width="55" alt="Avatar">
-                </div>
-                <div class="col-sm-10 text-left">
-                    <div class="row"><a asp-controller="Profile" asp-action="Index" asp-route-id="@post.UserId"><strong>@post.UserFullName</strong></a> is feeling @post.Feeling.ToString()</div>
-                    <div class="row"><small>@post.Date.ToShortDateString()</small></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <p>@post.Text</p>
-                </div>
-            </div>
+                <div class="well">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img src="@post.UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="55" width="55" alt="Avatar">
+                        </div>
+                        <div class="col-sm-10 text-left">
+                            <div class="row"><a asp-controller="EditProfile" asp-action="Index" asp-route-id="@post.UserId"><strong>@post.UserFullName</strong></a> is feeling @post.Feeling.ToString()</div>
+                            <div class="row"><small>@post.Date.ToShortDateString()</small></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>@post.Text</p>
+                        </div>
+                    </div>
 
-            @if (!string.IsNullOrEmpty(post.Photo.ToRenderablePictureString()))
-            {
+                    @if (!string.IsNullOrEmpty(post.Photo.ToRenderablePictureString()))
+                    {
 
-                <div class="row">
-                    <img src="@post.Photo.ToRenderablePictureString()" class="img-responsive" style="width: 100%" alt="Avatar">
+                        <div class="row">
+                            <img src="@post.Photo.ToRenderablePictureString()" class="img-responsive" style="width: 100%" alt="Avatar">
+                        </div>
+
+                    }
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a asp-controller="Posts"
+                               asp-action="Like"
+                               asp-route-postId="@post.Id"
+                               asp-route-pageIndex="@Model.Posts.PageIndex"
+                               class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                            </a>
+                            
+                        </div>
+                    </div>
+
+                    
                 </div>
-
-            }
-
-            <div class="row">
-                <div class="col-sm-4">
-                    <a asp-controller="Posts"
-                       asp-action="Like"
-                       asp-route-postId="@post.Id"
-                       asp-route-pageIndex="@Model.Posts.PageIndex"
-                       class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-thumbs-up"></span> Like
-                    </a>
-                    <a asp-controller="Comment" asp-action="Create" asp-route-postId="@post.Id" class="btn btn-default btn-sm">Comment</a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-4">
-                    <small>@post.Likes Likes / @post.Comments.Count() Comments</small>
-                </div>
-            </div>
-            @if (post.Comments.Any())
-            {
-                <hr />
-                @*   @Html.Partial("_PostComments", post.Comments)*@
-            }
-        </div>
 
             }
 
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <a asp-controller="Users" asp-action="Index"
-                       asp-route-userId="@(Model.userId)"
+                       asp-route-userId="@(Model.Id)"
                        asp-route-page="@(Model.Posts.PageIndex - 1)"
                        class="btn btn-default @prevDisabled">
                         Previous
                     </a>
                     <a asp-controller="Users" asp-action="Index"
-                       asp-route-userId="@(Model.userId)"
+                       asp-route-userId="@(Model.Id)"
                        asp-route-page="@(Model.Posts.PageIndex + 1)"
                        class="btn btn-default @nextDisabled">
                         Next

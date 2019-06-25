@@ -18,12 +18,13 @@ namespace FriendsAndTravel.BAL.Services
     {
         private readonly FriendsAndTravelDbContext db;
         private readonly IPhotoService photoService;
-     
+    
+
         public PostService(FriendsAndTravelDbContext db, IPhotoService photoService)
         {
             this.db = db;
             this.photoService = photoService;
-          
+     
         }
 
         public void Create(string userId, Feeling feeling, string text, IFormFile photo)
@@ -45,6 +46,7 @@ namespace FriendsAndTravel.BAL.Services
         public void Delete(int postId)
         {
             var post = this.db.Posts.Find(postId);
+          
             this.db.Remove(post);
             this.db.SaveChanges();
         }
@@ -94,13 +96,13 @@ namespace FriendsAndTravel.BAL.Services
         {
             var posts = this.db
                 .Posts
-               .Where(p => p.UserId == userId)
+                .Where(p => p.UserId == userId)
                 .Include(p => p.Comments)
                 .ThenInclude(p => p.User)
-                .ProjectTo<PostModel>()
+               .ProjectTo<PostModel>()
                 .OrderByDescending(p => p.Date);
 
-            return posts != null ? PaginatedList<PostModel>.Create(posts.AsNoTracking(), pageIndex, pageSize) : null;
+            return posts != null ? PaginatedList<PostModel>.Create(posts, pageIndex, pageSize) : null;
         }
 
         public bool UserIsAuthorizedToEdit(int postId, string userId) => this.db.Posts.Any(p => p.Id == postId && p.UserId == userId);

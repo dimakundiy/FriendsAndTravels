@@ -15,6 +15,7 @@ namespace FriendsAndTravel.BAL.DTO
         public DateTime Birthday { get; set; }
         public Location Location { get; set; }
         public Gender Gender { get; set; }
+        public User GetUser { get; set; }
         public bool IsDeleted { get; set; } = false;
         public IEnumerable<Photo> Photos { get; set; }
         public string Phone { get; set; }

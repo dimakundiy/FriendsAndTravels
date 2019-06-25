@@ -27,9 +27,11 @@ namespace FriendsAndTravel.Controllers
         UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IPostService _postService;
+        private readonly ICategoryService _categoryService;
        
-        public ProfileController(FriendsAndTravelDbContext context, IHostingEnvironment appEnvironment, IMapper mapper,  UserManager<User> userManager, IPostService postService)
+        public ProfileController(FriendsAndTravelDbContext context, IHostingEnvironment appEnvironment, IMapper mapper,  UserManager<User> userManager, IPostService postService, ICategoryService categoryService)
         {
+            _categoryService = categoryService;
             _postService = postService;
             _userManager = userManager;
             _mapper = mapper;
@@ -41,18 +43,24 @@ namespace FriendsAndTravel.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+             List<string> user_categories = new List<string>();
+            foreach (var item in _categoryService.UserCategories(user.UserName))
+            {
+                user_categories.Add(item.Tag);
+            }
             var model = new PersonViewModel
             {
-
+                Id=user.Id,
                 phot = user.Avatar,
                 UserName = user.UserName,
                 Email = user.Email,
                 Gender = user.Gender,
                 Location = user.Location,
                 Phone = user.PhoneNumber,
-                Age = DateTime.Today.Year - user.Birthday.Year
-              //  Posts = _postService.PostsByUserId(user.Id, 1, 5)
-                
+                Age = DateTime.Today.Year - user.Birthday.Year,
+                UserCategories = user_categories
+                //  Posts = _postService.PostsByUserId(user.Id, 1, 5)
+
             };
             return View(model);
         }
