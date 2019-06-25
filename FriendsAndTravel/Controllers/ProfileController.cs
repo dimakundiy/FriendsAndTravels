@@ -58,8 +58,8 @@ namespace FriendsAndTravel.Controllers
                 Location = user.Location,
                 Phone = user.PhoneNumber,
                 Age = DateTime.Today.Year - user.Birthday.Year,
-                UserCategories = user_categories
-                //  Posts = _postService.PostsByUserId(user.Id, 1, 5)
+                UserCategories = user_categories,
+                 Posts = _postService.PostsByUserId(user.Id, 1, 5)
 
             };
             return View(model);

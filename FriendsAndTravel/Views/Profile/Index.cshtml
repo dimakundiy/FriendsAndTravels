@@ -38,19 +38,17 @@
                 </div>
             </div>
         </div>
-        @if (Model.Posts != null && Model.Posts.Any())
+        @if ( Model.Posts.Any())
         {
 
-            var prevDisabled = !Model.Posts.HasPreviousPage ? "disabled" : "";
-            var nextDisabled = !Model.Posts.HasNextPage ? "disabled" : "";
-
+         
             @foreach (var post in Model.Posts)
             {
 
                 <div class="well">
                     <div class="row">
                         <div class="col-sm-2">
-                            <img src="@post.UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="55" width="55" alt="Avatar">
+                            <img src="@post.Photo.ToRenderablePictureString()" class="img-circle pull-left" height="55" width="55" alt="Avatar">
                         </div>
                         <div class="col-sm-10 text-left">
                             <div class="row"><a asp-controller="EditProfile" asp-action="Index" asp-route-id="@post.UserId"><strong>@post.UserFullName</strong></a> is feeling @post.Feeling.ToString()</div>
@@ -77,7 +75,7 @@
                             <a asp-controller="Posts"
                                asp-action="Like"
                                asp-route-postId="@post.Id"
-                               asp-route-pageIndex="@Model.Posts.PageIndex"
+                            
                                class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-thumbs-up"></span> Like
                             </a>
@@ -90,22 +88,7 @@
 
             }
 
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <a asp-controller="Users" asp-action="Index"
-                       asp-route-userId="@(Model.Id)"
-                       asp-route-page="@(Model.Posts.PageIndex - 1)"
-                       class="btn btn-default @prevDisabled">
-                        Previous
-                    </a>
-                    <a asp-controller="Users" asp-action="Index"
-                       asp-route-userId="@(Model.Id)"
-                       asp-route-page="@(Model.Posts.PageIndex + 1)"
-                       class="btn btn-default @nextDisabled">
-                        Next
-                    </a>
-                </div>
-            </div>
+            
         }
         else
         {

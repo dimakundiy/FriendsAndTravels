@@ -18,7 +18,7 @@ namespace FriendsAndTravel.BAL.Interfaces
 
         bool UserIsAuthorizedToEdit(int postId, string userId);
 
-        PaginatedList<PostModel> PostsByUserId(string userId, int pageIndex, int pageSize);
+        IEnumerable<PostModel> PostsByUserId(string userId, int pageIndex, int pageSize);
 
         PaginatedList<PostModel> FriendPostsByUserId(string userId, int pageIndex, int pageSize);
 

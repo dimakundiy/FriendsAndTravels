@@ -30,7 +30,7 @@ namespace FriendsAndTravel.Models
 
         public string StatusMessage { get; set; }
         public List<string> UserCategories { get; set; }
-        public PaginatedList<PostModel> Posts { get; set; } = null;
+        public IEnumerable<PostModel> Posts { get; set; } = new List<PostModel>();
         public IEnumerable<EventModel> Events { get; set; } = new List<EventModel>();
         public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
         public IEnumerable<string> Interests { get; set; } = new List<string>();

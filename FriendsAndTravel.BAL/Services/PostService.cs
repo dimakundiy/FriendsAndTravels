@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using FriendsAndTravel.BAL.Interfaces;
 using FriendsAndTravel.Data;
 using FriendsAndTravel.Data.CustomDataStructures;
@@ -18,10 +19,11 @@ namespace FriendsAndTravel.BAL.Services
     {
         private readonly FriendsAndTravelDbContext db;
         private readonly IPhotoService photoService;
-    
+        private readonly IMapper mapper;
 
-        public PostService(FriendsAndTravelDbContext db, IPhotoService photoService)
+        public PostService(FriendsAndTravelDbContext db, IPhotoService photoService, IMapper mapper)
         {
+            this.mapper = mapper;
             this.db = db;
             this.photoService = photoService;
      
@@ -92,17 +94,18 @@ namespace FriendsAndTravel.BAL.Services
             return this.db.Posts.Where(p => p.Id == postId).ProjectTo<PostModel>().FirstOrDefault();
         }
 
-        public PaginatedList<PostModel> PostsByUserId(string userId, int pageIndex, int pageSize)
+        public IEnumerable<PostModel> PostsByUserId(string userId, int pageIndex, int pageSize)
         {
             var posts = this.db
                 .Posts
                 .Where(p => p.UserId == userId)
                 .Include(p => p.Comments)
-                .ThenInclude(p => p.User)
-               .ProjectTo<PostModel>()
+                .ThenInclude(p => p.User)              
                 .OrderByDescending(p => p.Date);
 
-            return posts != null ? PaginatedList<PostModel>.Create(posts, pageIndex, pageSize) : null;
+            return mapper.Map<IEnumerable<PostModel>>(posts);
+
+            
         }
 
         public bool UserIsAuthorizedToEdit(int postId, string userId) => this.db.Posts.Any(p => p.Id == postId && p.UserId == userId);
