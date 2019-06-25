@@ -91,7 +91,8 @@ namespace FriendsAndTravel.BAL.Services
 
         public PostModel PostById(int postId)
         {
-            return this.db.Posts.Where(p => p.Id == postId).ProjectTo<PostModel>().FirstOrDefault();
+            var posts= this.db.Posts.Where(p => p.Id == postId).FirstOrDefault();
+            return mapper.Map<PostModel>(posts);
         }
 
         public IEnumerable<PostModel> PostsByUserId(string userId, int pageIndex, int pageSize)
