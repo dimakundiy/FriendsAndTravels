@@ -9,22 +9,22 @@ namespace FriendsAndTravel.Migrations
             migrationBuilder.DeleteData(
                 table: "Role",
                 keyColumns: new[] { "Id", "ConcurrencyStamp" },
-                keyValues: new object[] { "73b8a760-641b-4b28-ba16-54378f1fa5b4", "f4d86ac1-a8f4-4240-b67c-0bc1ff46c5a4" });
+                keyValues: new object[] { "a01a4241-800e-4d50-ae98-dd94f8b090ae", "0aa20c0e-6a97-44b5-9c1f-417ff6cc2162" });
 
             migrationBuilder.DeleteData(
                 table: "Role",
                 keyColumns: new[] { "Id", "ConcurrencyStamp" },
-                keyValues: new object[] { "aab4fbaf-8c49-4520-bdd5-82bf5b9bb3ee", "a72e98f9-c334-4191-9a56-0e2146acd562" });
+                keyValues: new object[] { "e7f73dc2-2672-43e5-a0a8-2751a2ad4ceb", "3c001f9a-3ab4-40b4-a78d-67860e25e825" });
 
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e3830262-105c-402c-acde-38c3cb493cde", "855be11c-78ce-499a-b338-e17eddc40f5b", "Admin", "ADMIN" });
+                values: new object[] { "c0bcbdba-0895-4f14-b4b9-ed21d677024e", "3c8ed07e-75bb-471d-a831-7d0beda69515", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "9da3a8e9-9d38-4929-af5e-794e9cff543b", "c1211ef0-91a7-4933-aafe-cfea09332353", "User", "USER" });
+                values: new object[] { "2991f08f-3794-4392-b530-c616e1cd628d", "9cb2c896-acdf-48c1-a750-5f76aa57d5d0", "User", "USER" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -32,22 +32,22 @@ namespace FriendsAndTravel.Migrations
             migrationBuilder.DeleteData(
                 table: "Role",
                 keyColumns: new[] { "Id", "ConcurrencyStamp" },
-                keyValues: new object[] { "9da3a8e9-9d38-4929-af5e-794e9cff543b", "c1211ef0-91a7-4933-aafe-cfea09332353" });
+                keyValues: new object[] { "2991f08f-3794-4392-b530-c616e1cd628d", "9cb2c896-acdf-48c1-a750-5f76aa57d5d0" });
 
             migrationBuilder.DeleteData(
                 table: "Role",
                 keyColumns: new[] { "Id", "ConcurrencyStamp" },
-                keyValues: new object[] { "e3830262-105c-402c-acde-38c3cb493cde", "855be11c-78ce-499a-b338-e17eddc40f5b" });
+                keyValues: new object[] { "c0bcbdba-0895-4f14-b4b9-ed21d677024e", "3c8ed07e-75bb-471d-a831-7d0beda69515" });
 
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "73b8a760-641b-4b28-ba16-54378f1fa5b4", "f4d86ac1-a8f4-4240-b67c-0bc1ff46c5a4", "Admin", "ADMIN" });
+                values: new object[] { "a01a4241-800e-4d50-ae98-dd94f8b090ae", "0aa20c0e-6a97-44b5-9c1f-417ff6cc2162", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "aab4fbaf-8c49-4520-bdd5-82bf5b9bb3ee", "a72e98f9-c334-4191-9a56-0e2146acd562", "User", "USER" });
+                values: new object[] { "e7f73dc2-2672-43e5-a0a8-2751a2ad4ceb", "3c001f9a-3ab4-40b4-a78d-67860e25e825", "User", "USER" });
         }
     }
 }

@@ -5,7 +5,7 @@
     <div class="col-sm-6 col-sm-offset-3 well text-center">
         <div class="thumbnail">
             <h4><strong>@Model.Title</strong></h4>
-            <img src="@Model.Photo" alt="Event" class="img-responsive">
+            <img src="@Model.ImUrl" alt="Event" class="img-responsive">
             <p><strong>@Model.Location</strong></p>
             <p>@Model.DateStarts.ToShortDateString()</p>
             <p>@Model.Description</p>
@@ -17,6 +17,11 @@
                 <a asp-controller="Events" asp-action="JointEvent" asp-route-id="@Model.Id" class="btn btn-primary">Going</a>
             }
             <a href='javascript:history.go(-1)' class="btn btn-default">Back</a>
+
         </div>
+        @if (User.GetUserId()==@Model.OwnerId || User.IsInRole("Admin"))
+        {
+        <a asp-controller="Events" asp-action="DeleteEvent" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        }
     </div>
 </div>

@@ -11,11 +11,11 @@ using System.Text;
 
 namespace Model.Models
 {
-        public class EventModel : IMapFrom<Event>, IHaveCustomMapping
+        public class EventModel 
         {
             public int Id { get; set; }
 
-            public byte[] Photo { get; set; }
+            public string ImUrl { get; set; }
 
             public string Title { get; set; }
 
@@ -35,13 +35,6 @@ namespace Model.Models
 
             public string OwnerId { get; set; }
      
-        public void ConfigureMapping(Profile profile)
-            {
-                profile.CreateMap<Event, EventModel>()
-                    .ForMember(e => e.ParticipantId, cfg =>
-                    cfg.MapFrom(e => e.Participants.Select(p => p.UserId).ToList()))
-                    .ForMember(e=> e.Photo, cfg=> cfg.MapFrom(e=> e.Photo))
-                    .ForMember(e => e.ParticipantsCount, cfg => cfg.MapFrom(e => e.Participants.Count));
-            }
+        
         }
 }

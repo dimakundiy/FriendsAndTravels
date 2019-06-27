@@ -9,15 +9,17 @@ namespace Model.DTO
 {
     public class EventDTO
     {
-
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Location { get; set; }
-        public string description { get; set; }
-        public DateTime dateStarts { get; set; }
-        public DateTime dateEnds { get; set; }
-        public string creatorId { get; set; }
-        public IFormFile Photo { get; set; }
+        public string Description { get; set; }
+        public DateTime DateStarts { get; set; }
+        public DateTime DateEnds { get; set; }
+        public string CreatorId { get; set; }
+        public string ImUrl { get; set; }
         public List<string> Categories { get; set; }
         public string UserId { get; set; }
+        public User Owner { get; set; }
+        public Event Event { get; set; }
     }
 }

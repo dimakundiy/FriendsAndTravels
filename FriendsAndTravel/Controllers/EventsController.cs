@@ -27,6 +27,11 @@ namespace FriendsAndTravel.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AllEvents()
+        {
+            return View();
+        }
         [HttpPost]
    
         public IActionResult Create(EventFormModel model)
@@ -34,11 +39,11 @@ namespace FriendsAndTravel.Controllers
             EventDTO eventDTO = new EventDTO {
                 Title=model.Title,
                 Location= model.Location,
-                description= model.Description,
-                dateStarts= model.DateStarts,
-                dateEnds= model.DateEnds,
-                creatorId =this.User.GetUserId(),
-                Photo = model.Photo
+                Description= model.Description,
+                DateStarts= model.DateStarts,
+                DateEnds= model.DateEnds,
+                CreatorId =this.User.GetUserId(),
+               ImUrl=model.ImUrl
 
             };
            
@@ -48,7 +53,11 @@ namespace FriendsAndTravel.Controllers
 
             return RedirectToAction("Index", "Profile");
         }
-
+        public IActionResult DeleteEvent(int event_id)
+        {
+            eventService.DeleteEvent(event_id);
+            return RedirectToAction("Index", "Profile");
+        }
         public IActionResult Details(int id)
         {
             if (!this.eventService.Exists(id))

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Model.Models
 {
-    public class PostModel : IMapFrom<Post>, IHaveCustomMapping
+    public class PostModel 
     {
         public int Id { get; set; }
 
@@ -30,12 +30,5 @@ namespace Model.Models
 
     
 
-        public void ConfigureMapping(Profile profile)
-        {
-            profile.CreateMap<Post, PostModel>()
-               .ForMember(p => p.UserProfilePicture, cfg => cfg.MapFrom(p => p.User.Avatar))
-              .ForMember(p => p.UserFullName, cfg => cfg.MapFrom(p => p.User.UserName));
-             
-        }
     }
 }

@@ -83,12 +83,13 @@ namespace FriendsAndTravel.Data.Repositories
             }
         }
 
-        public virtual void Delete(TEntity item)
+        public  void Delete(TEntity item)
         {
+            if (item != null) { 
             if (context.Entry(item).State == EntityState.Detached)
             {
                 dbSet.Attach(item);
-            }
+            }}
             dbSet.Remove(item);
         }
 

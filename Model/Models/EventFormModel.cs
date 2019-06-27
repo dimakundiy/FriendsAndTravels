@@ -9,9 +9,8 @@ using System.Text;
 namespace Model.Models
 {
   public   class EventFormModel
-    {
-       
-
+        {
+        public string Id { get; set; }
         [Required]
         [MaxLength(DataConstants.MaxEventTitleLength)]
         public string Title { get; set; }
@@ -19,8 +18,8 @@ namespace Model.Models
         [Required]
         public string Location { get; set; }
 
-        [Display(Name = "Upload a photo")]
-        public IFormFile Photo { get; set; }
+        [Display(Name = "Photo URl")]
+        public string ImUrl { get; set; }
 
         [Required]
         public string Description { get; set; }

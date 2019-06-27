@@ -64,52 +64,11 @@ namespace FriendsAndTravel.Controllers
                 UserCategories = user_categories,
                 Posts = _postService.PostsByUserId(user.Id, 1, 5),
                 Events = eventService.EventsByUserId(user.Id)
-                
+                //Events= eventService.UpcomingThreeEvents()
             };
             return View(model);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> AddFile(IFormFileCollection uploads)
-        {
-            foreach (var uploadedFile in uploads)
-            {
-           
-                string path = "/Files/" + uploadedFile.FileName;
-               
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-                Photo file = new Photo { Name = uploadedFile.FileName, Path = path };
-                _context.Photos.Add(file);
-            }
-            _context.SaveChanges();
-
-            return RedirectToAction("AddFile");
-        }
-        [HttpPost]
-        public async Task<IActionResult> AddFile(IFormFile uploadedFile)
-        {
-            if (uploadedFile != null)
-            {
-                string path = "/Files/" + uploadedFile.FileName;
-             
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-                Photo file = new Photo { Name = uploadedFile.FileName, Path = path };
-                _context.Photos.Add(file);
-                _context.SaveChanges();
-            }
-
-            return RedirectToAction("Index");
-        }
        
-
-        
-
     }
 }
 

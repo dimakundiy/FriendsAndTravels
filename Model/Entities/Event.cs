@@ -12,6 +12,8 @@ namespace FriendsAndTravel.Data.Entities
 
         public byte[] Photo { get; set; }
 
+        [Url]
+        public string ImageUrl { get; set; }
         [Required]
         [MaxLength(DataConstants.MaxEventTitleLength)]
         public string Title { get; set; }

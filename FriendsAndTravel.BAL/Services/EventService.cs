@@ -32,7 +32,16 @@ namespace FriendsAndTravel.BAL.Services
             this.mapper = mapper;
             this.db = db;
         }
-
+        public IEnumerable<EventDTO> Events()
+        {
+            var events = unitOfWork.EventRepository.GetAll().AsEnumerable();
+            return mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
+        }
+        public void DeleteEvent(int event_id)
+        {
+            unitOfWork.EventRepository.Delete(unitOfWork.EventRepository.GetById(event_id));
+            unitOfWork.SaveAsync();
+        }
         public void AddUserToEvent(string userId, int eventId)
         {
             if (this.Exists(eventId))
@@ -81,14 +90,14 @@ namespace FriendsAndTravel.BAL.Services
             {
                 Title = e.Title,
                 Location = e.Location,
-                Description = e.description,
-                DateEnds = e.dateEnds,
-                DateStarts = e.dateStarts,
-                OwnerId=e.creatorId
-               
+                Description = e.Description,
+                DateEnds = e.DateEnds,
+                DateStarts = e.DateStarts,
+                OwnerId=e.CreatorId,
+                ImageUrl= e.ImUrl
             };
             
-            ev.Participants.Add(new EventUser { UserId = e.creatorId });
+            ev.Participants.Add(new EventUser { UserId = e.CreatorId });
 
             this.db.Events.Add(ev);
             this.db.SaveChanges();
@@ -102,7 +111,7 @@ namespace FriendsAndTravel.BAL.Services
                     .Include(e => e.Participants)
                     .FirstOrDefault(e => e.Id == id);
 
-                return Mapper.Map<EventModel>(ev);
+                return mapper.Map<EventModel>(ev);
             }
 
             return null;

@@ -47,6 +47,8 @@ namespace FriendsAndTravel.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("ImageUrl");
+
                     b.Property<string>("Location");
 
                     b.Property<int>("LocationId");
@@ -239,8 +241,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "e3830262-105c-402c-acde-38c3cb493cde", ConcurrencyStamp = "855be11c-78ce-499a-b338-e17eddc40f5b", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "9da3a8e9-9d38-4929-af5e-794e9cff543b", ConcurrencyStamp = "c1211ef0-91a7-4933-aafe-cfea09332353", Name = "User", NormalizedName = "USER" }
+                        new { Id = "c0bcbdba-0895-4f14-b4b9-ed21d677024e", ConcurrencyStamp = "3c8ed07e-75bb-471d-a831-7d0beda69515", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "2991f08f-3794-4392-b530-c616e1cd628d", ConcurrencyStamp = "9cb2c896-acdf-48c1-a750-5f76aa57d5d0", Name = "User", NormalizedName = "USER" }
                     );
                 });
 

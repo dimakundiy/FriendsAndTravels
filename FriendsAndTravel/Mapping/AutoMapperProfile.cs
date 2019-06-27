@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
+using FriendsAndTravel.BAL.DTO;
 using FriendsAndTravel.Common.Mapping;
+using FriendsAndTravel.Data.Entities;
+using FriendsAndTravel.Models;
+using Model.DTO;
+using Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,54 +15,35 @@ namespace FriendsAndTravel.Mapping
 {
     public class AutoMapperProfile : Profile
     {
-        //this.CreateMap<Camera, CameraListModel>();
-
-        private readonly string[] Assemblies = new[]
-        {
-            "FriendsAndTravel",
-            "FriendsAndTravel.BAL",
-            "FriendsAndTravel.Common",
-            "FriendsAndTravel.Data",
-            "Model"
-        };
-
         public AutoMapperProfile()
         {
-            var types = new List<Type>();
+            CreateMap<User, UserDTO>();
+            CreateMap<UserDTO, User>();
+            CreateMap<LoginModel, UserDTO>();
+            CreateMap<RegisterModel, UserDTO>()
+          .ForMember(dest => dest.Role, opts => opts.MapFrom(src => "user"));
+        
+            CreateMap<Post, PostModel>()
+             .ForMember(p => p.UserProfilePicture, cfg => cfg.MapFrom(p => p.User.Avatar))
+            .ForMember(p => p.UserFullName, cfg => cfg.MapFrom(p => p.User.UserName));
 
-            foreach (var assemblyName in this.Assemblies)
-            {
-                types.AddRange(Assembly.Load(assemblyName).GetTypes());
-            }
+            CreateMap<Event, EventDTO>();
 
-            types
-                   .Where(t => t.IsClass
-                   && !t.IsAbstract
-                   && t.GetInterfaces().Where(i => i.IsGenericType).Select(i => i.GetGenericTypeDefinition()).Contains(typeof(IMapFrom<>)))
-                   .Select(t => new
-                   {
-                       Source = t
-                       .GetInterfaces()
-                       .Where(i => i.IsGenericType)
-                       .Select(i => new
-                       {
-                           Definition = i.GetGenericTypeDefinition(),
-                           Arguments = i.GetGenericArguments()
-                       })
-                       .Where(i => i.Definition == typeof(IMapFrom<>))
-                       .SelectMany(i => i.Arguments)
-                       .First(),
-                       Destination = t
-                   })
-                   .ToList()
-                   .ForEach(m => this.CreateMap(m.Source, m.Destination));
+            CreateMap<EventDTO, EventModel>();
 
-            types
-                .Where(t => t.IsClass && !t.IsAbstract && typeof(IHaveCustomMapping).IsAssignableFrom(t))
-                .Select(Activator.CreateInstance)
-                .Cast<IHaveCustomMapping>()
-                .ToList()
-                .ForEach(m => m.ConfigureMapping(this));
+            CreateMap<EventDTO, EventFormModel>();
+            CreateMap<Event, EventFormModel>();
+            CreateMap<EventFormModel, EventModel>();
+            
+            CreateMap<Event, EventModel>()
+            .ForMember(dest => dest.ImUrl, opts => opts.MapFrom(src => src.ImageUrl))
+                    .ForMember(e => e.ParticipantId, cfg =>
+                    cfg.MapFrom(e => e.Participants.Select(p => p.UserId).ToList()))
+                    .ForMember(e => e.ParticipantsCount, cfg => cfg.MapFrom(e => e.Participants.Count));
+            CreateMap<User, PersonViewModel>()
+                .ForMember(u => u.Posts, cfg => cfg.Ignore())
+                .ForMember(u => u.Events, cfg => cfg.Ignore())
+                .ForMember(u => u.Interests, cfg => cfg.MapFrom(u => u.Categories.Select(i => i.Categories.Tag).ToList()));
         }
     }
 }

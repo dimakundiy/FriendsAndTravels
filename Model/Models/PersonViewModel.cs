@@ -34,14 +34,10 @@ namespace FriendsAndTravel.Models
         public List<string> UserCategories { get; set; }
         public IEnumerable<PostModel> Posts { get; set; } = new List<PostModel>();
         public IEnumerable<EventModel> Events { get; set; } = new List<EventModel>();
+       
         public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
         public IEnumerable<string> Interests { get; set; } = new List<string>();
 
-        public void ConfigureMapping(Profile profile)
-        {
-            profile.CreateMap<User, PersonViewModel>()
-                .ForMember(u => u.Posts, cfg => cfg.Ignore())
-                 .ForMember(u => u.UserCategories, cfg => cfg.MapFrom(u => u.Categories.Select(i => i.Categories.Tag).ToList()));
-        }
+      
     }
 }
