@@ -17,5 +17,6 @@ namespace FriendsAndTravel.BAL.Interfaces
         Task<bool> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);
         Task<UserDTO> FindProfileByUserName(string UserName);
+       
     }
 }

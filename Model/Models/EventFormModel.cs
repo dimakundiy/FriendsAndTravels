@@ -1,39 +1,37 @@
-﻿using Model.Entities;
+﻿using FriendsAndTravel.Data;
+using FriendsAndTravel.Data.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace FriendsAndTravel.Data.Entities
+namespace Model.Models
 {
-    public class Event
+  public   class EventFormModel
     {
-        public int Id { get; set; }
-
-        [Url]
+        [Display(Name = "Photo Url")]
         public string ImageUrl { get; set; }
 
         [Required]
         [MaxLength(DataConstants.MaxEventTitleLength)]
         public string Title { get; set; }
 
-
-        public int LocationId { get; set; }
+        [Required]
         public string Location { get; set; }
 
         [Required]
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Start Date")]
         public DateTime DateStarts { get; set; }
 
         [Required]
+        [Display(Name = "End Date")]
         public DateTime DateEnds { get; set; }
-       
-   
-          public string OwnerId { get; set; }
-        public virtual User Owner { get; set; }
-        public ICollection<EventUser> Participants { get; set; } = new List<EventUser>();
-         public ICollection<EventCategory>  EventCategories { get; set; } = new List<EventCategory>();
+
+        public List<string> SelectedCategories { get; set; }
+        public List<Categories> Categories { get; set; }
     }
 }

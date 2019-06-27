@@ -11,12 +11,6 @@ namespace FriendsAndTravel.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-
-            builder
-                .HasMany(u => u.Friends)
-                .WithOne(uf => uf.User)
-                .HasForeignKey(uf => uf.UserId);
-
            
             builder
                 .HasMany(u => u.Photos)

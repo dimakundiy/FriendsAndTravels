@@ -18,8 +18,12 @@ namespace FriendsAndTravel.Data.Repositories
         public ICategoryRepository CategoryRepository { get; private set; }
         public IUserCategoryRepository UserCategoryRepository { get; private set; }
         public IUserProfileRepository userProfileRepository { get; private set; }
-
-
+        public IEventCategoryRepository EventCategoryRepository { get; private set; }
+        public IUserEventRepository UserEventRepository { get; private set; }
+        public IEventRepository EventRepository { get; private set; }
+        public IEventPhotoRepository EventPhotoRepository { get; private set; }
+        public IPhotoRepository PhotoRepository { get; private set; }
+        public ILocationRepository LocationRepository { get; private set; }
         public IdentityUnitOfWork(
 
                                   FriendsAndTravelDbContext db,
@@ -28,7 +32,13 @@ namespace FriendsAndTravel.Data.Repositories
                                   RoleManager<IdentityRole> roleManager,
                                   ICategoryRepository categoryRepository,
                                   IUserCategoryRepository userCategoryRepository,
-                                  IUserProfileRepository UserProfileRepository
+                                  IUserProfileRepository UserProfileRepository,
+                                  IUserEventRepository userEventRepository,
+                                  IEventRepository eventRepository,
+                                  IEventCategoryRepository eventCategoryRepository,
+                                  IPhotoRepository photoRepository,
+                                  IEventPhotoRepository eventPhotoRepository,
+                                  ILocationRepository locationRepository
                                   )
         {
             Database = db;
@@ -38,6 +48,12 @@ namespace FriendsAndTravel.Data.Repositories
             UserCategoryRepository = userCategoryRepository;
             CategoryRepository = categoryRepository;
             this.userProfileRepository= UserProfileRepository;
+            UserEventRepository = userEventRepository;
+            EventCategoryRepository = eventCategoryRepository;
+            EventRepository = eventRepository;
+            PhotoRepository = photoRepository;   
+            EventPhotoRepository = eventPhotoRepository;
+            LocationRepository = locationRepository;
         }
 
 

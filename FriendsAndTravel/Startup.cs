@@ -39,9 +39,9 @@ namespace FriendsAndTravel
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("FriendsAndTravel")));
 
                 // dotnet ef migrations add InitDB --project ../LetsTogether.DAL -c AppDBContext
-                services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<FriendsAndTravelDbContext>();
+                services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<FriendsAndTravelDbContext>().AddDefaultTokenProviders();
 
-                services.Configure<IdentityOptions>(options =>
+            services.Configure<IdentityOptions>(options =>
                 {
                     // Password settings.
                     options.Password.RequireDigit = true;
@@ -85,7 +85,14 @@ namespace FriendsAndTravel
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
-
+            services.AddTransient<IEventCategoryRepository, EventCategoryRepository>();
+            services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<IUserCategoryRepository, UserCategoryRepository>();
+            services.AddTransient<IUserEventRepository, UserEventRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<IPhotoRepository, PhotoRepository>();
+            services.AddTransient<IEventPhotoRepository, EventPhotoRepository>();
+            services.AddTransient<IEventService, EventService>();
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

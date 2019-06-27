@@ -20,7 +20,7 @@ namespace FriendsAndTravel.BAL.Interfaces
 
         IEnumerable<PostModel> PostsByUserId(string userId, int pageIndex, int pageSize);
 
-        PaginatedList<PostModel> FriendPostsByUserId(string userId, int pageIndex, int pageSize);
+      
 
         PostModel PostById(int postId);
 

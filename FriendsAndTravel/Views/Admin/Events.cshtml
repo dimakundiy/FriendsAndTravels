@@ -1,0 +1,10 @@
+﻿@using Model.DTO
+@model List<EventListDTO>
+@{
+    ViewData["Title"] = "Events";
+}
+
+
+<h2>Events</h2>
+
+@Html.Partial("ListEvent", Model)

@@ -2,6 +2,7 @@
 using FriendsAndTravel.Data.CustomDataStructures;
 using FriendsAndTravel.Data.Entities;
 using Microsoft.AspNetCore.Http;
+using Model.DTO;
 using Model.Entities;
 using Model.Models;
 using System;

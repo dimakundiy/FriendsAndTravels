@@ -21,10 +21,9 @@ namespace FriendsAndTravel.Data
         public DbSet<Comment> Comments { get; set; }
          public DbSet<Location> Locations { get; set; }
 
-        public DbSet<UserFriend> UserFriend { get; set; }
-            
         public DbSet<Event> Events { get; set; }
-
+        public DbSet<EventCategory> EventCategories { get; set; }
+        public DbSet<EventPhoto> EventPhotos { get; set; }
         public DbSet<Categories> Categories { get; set; }
         
         public FriendsAndTravelDbContext(DbContextOptions<FriendsAndTravelDbContext> options)
@@ -40,6 +39,7 @@ namespace FriendsAndTravel.Data
             builder.ApplyConfiguration(new UserCategoriesConfiguration());
             builder.ApplyConfiguration(new EventUserConfiguration());
             builder.ApplyConfiguration(new PostConfiguration());
+            builder.ApplyConfiguration(new EventCategoryConfiguration());
             base.OnModelCreating(builder);
 
 

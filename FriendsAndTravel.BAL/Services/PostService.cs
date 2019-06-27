@@ -64,20 +64,7 @@ namespace FriendsAndTravel.BAL.Services
 
         public bool Exists(int id) => this.db.Posts.Any(p => p.Id == id);
 
-        public PaginatedList<PostModel> FriendPostsByUserId(string userId, int pageIndex, int pageSize)
-        {
-            var friendListIds = this.FriendsIds(userId);
-
-            var posts = this.db
-                .Posts
-                .Where(p => friendListIds.Contains(p.UserId) || p.UserId == userId)
-                .Include(p => p.Comments)
-                .ThenInclude(p => p.User)
-                .ProjectTo<PostModel>()
-                .OrderByDescending(p => p.Date);
-
-            return posts != null ? PaginatedList<PostModel>.Create(posts, pageIndex, pageSize) : null;
-        }
+      
 
         public void Like(int postId)
         {
@@ -111,23 +98,6 @@ namespace FriendsAndTravel.BAL.Services
 
         public bool UserIsAuthorizedToEdit(int postId, string userId) => this.db.Posts.Any(p => p.Id == postId && p.UserId == userId);
 
-        private List<string> FriendsIds(string userId)
-        {
-            var friends = this.db
-                .UserFriend
-                .Where(u => u.UserId == userId)
-                .Select(u => u.Friend.Id)
-                .ToList();
-
-            var otherFriends = this.db
-                .UserFriend
-                .Where(u => u.FriendId == userId)
-                .Select(u => u.User.Id)
-                .ToList();
-
-            friends.AddRange(otherFriends);
-
-            return friends;
-        }
+       
     }
 }

@@ -28,9 +28,11 @@ namespace FriendsAndTravel.Controllers
         private readonly IMapper _mapper;
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
+  
        
         public ProfileController(FriendsAndTravelDbContext context, IHostingEnvironment appEnvironment, IMapper mapper,  UserManager<User> userManager, IPostService postService, ICategoryService categoryService)
         {
+           
             _categoryService = categoryService;
             _postService = postService;
             _userManager = userManager;
@@ -59,8 +61,8 @@ namespace FriendsAndTravel.Controllers
                 Phone = user.PhoneNumber,
                 Age = DateTime.Today.Year - user.Birthday.Year,
                 UserCategories = user_categories,
-                 Posts = _postService.PostsByUserId(user.Id, 1, 5)
-
+                Posts = _postService.PostsByUserId(user.Id, 1, 5)
+               
             };
             return View(model);
         }

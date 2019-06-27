@@ -17,7 +17,13 @@ namespace FriendsAndTravel.Data.Interfaces
         RoleManager<IdentityRole> RoleManager { get; }
         ICategoryRepository CategoryRepository { get; }
         IUserCategoryRepository UserCategoryRepository { get; }
-      IUserProfileRepository userProfileRepository { get; }
+        IEventCategoryRepository EventCategoryRepository { get; }
+        IEventRepository EventRepository { get; }
+        IUserProfileRepository userProfileRepository { get; }
+        IUserEventRepository UserEventRepository { get; }
+        ILocationRepository LocationRepository { get; }
+        IPhotoRepository PhotoRepository { get; }
+        IEventPhotoRepository EventPhotoRepository { get; }
         Task SaveAsync();
     }
 }

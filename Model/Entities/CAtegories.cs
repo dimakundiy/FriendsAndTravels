@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -13,6 +14,7 @@ namespace FriendsAndTravel.Data.Entities
         [MaxLength(DataConstants.MaxInterestLength)]
         [MinLength(DataConstants.MinInterestLength)]
         public string Tag { get; set; }
+        public ICollection <EventCategory> Events { get; set; } = new List<EventCategory>();
         public ICollection<UserCategories> Users { get; set; } = new List<UserCategories>();
     }
 }

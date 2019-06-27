@@ -17,10 +17,7 @@ namespace Model.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Subject")]
-        public string Subject { get; set; }
+        
 
         [Required]
         [Display(Name = "Message")]

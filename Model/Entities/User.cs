@@ -32,8 +32,6 @@ namespace FriendsAndTravel.Data.Entities
 
         public ICollection<Post> Posts { get; set; } = new List<Post>();
 
-        public ICollection<UserFriend> Friends { get; set; } = new List<UserFriend>();
-
         public ICollection<UserCategories> Categories { get; set; } = new List<UserCategories>();
 
         public ICollection<EventUser> Events { get; set; } = new List<EventUser>();

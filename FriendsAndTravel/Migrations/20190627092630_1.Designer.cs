@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FriendsAndTravel.Migrations
 {
     [DbContext(typeof(FriendsAndTravelDbContext))]
-    [Migration("20190624164247_1")]
+    [Migration("20190627092630_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,8 +42,6 @@ namespace FriendsAndTravel.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoriesId");
-
                     b.Property<DateTime>("DateEnds");
 
                     b.Property<DateTime>("DateStarts");
@@ -53,8 +51,11 @@ namespace FriendsAndTravel.Migrations
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<string>("Location")
-                        .IsRequired();
+                    b.Property<string>("Location");
+
+                    b.Property<int>("LocationId");
+
+                    b.Property<string>("OwnerId");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -62,7 +63,7 @@ namespace FriendsAndTravel.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriesId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Events");
                 });
@@ -216,24 +217,6 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("UserCategories");
                 });
 
-            modelBuilder.Entity("FriendsAndTravel.Data.Entities.UserFriend", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("FriendId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FriendId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserFriend");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -258,8 +241,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "c3999cb1-0ff1-4dfc-ba2a-158e93b944e6", ConcurrencyStamp = "d11f54d3-30c8-426f-8a9f-35a8a1ee0efa", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "26aef1ab-278a-457a-b2a8-30616bd6e471", ConcurrencyStamp = "c0b44dab-8e2a-4735-a670-cfafd4bd81e5", Name = "User", NormalizedName = "USER" }
+                        new { Id = "fdc0c520-1dcd-4181-9b87-58c80b2ccdd0", ConcurrencyStamp = "3368a2db-de93-4e40-837b-1210dfa77db5", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "2d891e6a-88c3-4100-9547-45df023b3d4f", ConcurrencyStamp = "ecee66a0-428e-47ff-b1ed-31b93f767e9c", Name = "User", NormalizedName = "USER" }
                     );
                 });
 
@@ -411,6 +394,42 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Model.Entities.EventCategory", b =>
+                {
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("EventId", "CategoryId");
+
+                    b.HasAlternateKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("EventCategories");
+                });
+
+            modelBuilder.Entity("Model.Entities.EventPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("PhotoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("EventPhotos");
+                });
+
             modelBuilder.Entity("Model.Entities.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -426,9 +445,9 @@ namespace FriendsAndTravel.Migrations
 
             modelBuilder.Entity("FriendsAndTravel.Data.Entities.Event", b =>
                 {
-                    b.HasOne("FriendsAndTravel.Data.Entities.Categories", "Categories")
+                    b.HasOne("FriendsAndTravel.Data.Entities.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("CategoriesId");
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("FriendsAndTravel.Data.Entities.EventUser", b =>
@@ -477,20 +496,9 @@ namespace FriendsAndTravel.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("FriendsAndTravel.Data.Entities.User", "User")
-                        .WithMany("categories")
+                        .WithMany("Categories")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("FriendsAndTravel.Data.Entities.UserFriend", b =>
-                {
-                    b.HasOne("FriendsAndTravel.Data.Entities.User", "Friend")
-                        .WithMany()
-                        .HasForeignKey("FriendId");
-
-                    b.HasOne("FriendsAndTravel.Data.Entities.User", "User")
-                        .WithMany("Friends")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -548,6 +556,32 @@ namespace FriendsAndTravel.Migrations
                     b.HasOne("FriendsAndTravel.Data.Entities.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Model.Entities.EventCategory", b =>
+                {
+                    b.HasOne("FriendsAndTravel.Data.Entities.Categories", "Category")
+                        .WithMany("Events")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FriendsAndTravel.Data.Entities.Event", "Event")
+                        .WithMany("EventCategories")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Model.Entities.EventPhoto", b =>
+                {
+                    b.HasOne("FriendsAndTravel.Data.Entities.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FriendsAndTravel.Data.Entities.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
