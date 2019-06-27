@@ -23,8 +23,12 @@ namespace FriendsAndTravel.BAL.Services
     {
         private readonly FriendsAndTravelDbContext db;
         private readonly IMapper mapper;
-        public EventService(FriendsAndTravelDbContext db, IMapper mapper)
+        private readonly IPhotoService photoService;
+        private readonly IUnitOfWork unitOfWork;
+        public EventService(FriendsAndTravelDbContext db, IMapper mapper, IPhotoService photoService, IUnitOfWork unitOfWork )
         {
+            this.unitOfWork = unitOfWork;
+            this.photoService = photoService;
             this.mapper = mapper;
             this.db = db;
         }
@@ -49,19 +53,42 @@ namespace FriendsAndTravel.BAL.Services
             }
         }
 
-        public void Create(string imageUrl, string title, string location, string description, DateTime dateStarts, DateTime dateEnds, string creatorId)
+        public EventModel EventById(int eventId)
+        {
+            var ev= this.db
+                .Events
+                .Where(p => p.Id == eventId).FirstOrDefault();
+            return mapper.Map<EventModel>(ev);
+        }
+        public IEnumerable<EventModel> EventsByUserId(string userId) {
+            var ev = this.db
+               .Events.Where(e => e.OwnerId == userId)
+               .ToList();
+            return mapper.Map<IEnumerable<EventModel>>(ev);
+
+        }
+        public IEnumerable<EventModel> UpcomingThreeEvents()
+        {
+            var ev = this.db
+                .Events.Where(e => e.DateEnds <= DateTime.UtcNow)
+                .OrderBy(e => e.DateStarts)
+                .ToList();
+            return mapper.Map<IEnumerable<EventModel>>(ev);
+        }
+        public void Create(EventDTO e)
         {
             var ev = new Event
             {
-                ImageUrl = imageUrl,
-                Title = title,
-                Location = location,
-                Description = description,
-                DateEnds = dateEnds,
-                DateStarts = dateStarts
+                Title = e.Title,
+                Location = e.Location,
+                Description = e.description,
+                DateEnds = e.dateEnds,
+                DateStarts = e.dateStarts,
+                OwnerId=e.creatorId
+               
             };
-           
-            ev.Participants.Add(new EventUser { UserId = creatorId });
+            
+            ev.Participants.Add(new EventUser { UserId = e.creatorId });
 
             this.db.Events.Add(ev);
             this.db.SaveChanges();
@@ -85,13 +112,6 @@ namespace FriendsAndTravel.BAL.Services
 
         public bool Exists(int id) => this.db.Events.Any(e => e.Id == id);
 
-        public IEnumerable<EventModel> UpcomingThreeEvents()
-        {
-            var ev= this.db
-                .Events.Where(e => e.DateEnds < DateTime.UtcNow)
-                .OrderBy(e => e.DateStarts).Take(3)
-                .ToList();
-            return mapper.Map<IEnumerable<EventModel>>(ev);
-        }
+       
     }
 }

@@ -20,7 +20,7 @@ namespace FriendsAndTravel.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
          public DbSet<Location> Locations { get; set; }
-
+        public DbSet<EventUser> EventUsers { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<EventPhoto> EventPhotos { get; set; }

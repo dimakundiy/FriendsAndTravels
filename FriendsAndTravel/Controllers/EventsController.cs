@@ -1,5 +1,6 @@
 ﻿using FriendsAndTravel.BAL.DTO;
 using FriendsAndTravel.BAL.Interfaces;
+using FriendsAndTravel.Data;
 using FriendsAndTravel.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Model.DTO;
@@ -14,9 +15,10 @@ namespace FriendsAndTravel.Controllers
     public class EventsController : Controller
     {
         private readonly IEventService eventService;
-
-        public EventsController(IEventService eventService)
+        private readonly IPhotoService photoService;
+        public EventsController(IEventService eventService, IPhotoService photoService)
         {
+            this.photoService = photoService;
             this.eventService = eventService;
         }
 
@@ -29,14 +31,20 @@ namespace FriendsAndTravel.Controllers
    
         public IActionResult Create(EventFormModel model)
         {
+            EventDTO eventDTO = new EventDTO {
+                Title=model.Title,
+                Location= model.Location,
+                description= model.Description,
+                dateStarts= model.DateStarts,
+                dateEnds= model.DateEnds,
+                creatorId =this.User.GetUserId(),
+                Photo = model.Photo
+
+            };
+           
             this.eventService.Create(
-                model.ImageUrl,
-                model.Title,
-                model.Location,
-                model.Description,
-                model.DateStarts,
-                model.DateEnds,
-                this.User.GetUserId());
+                      eventDTO
+              );
 
             return RedirectToAction("Index", "Profile");
         }

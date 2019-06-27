@@ -40,6 +40,7 @@ namespace Model.Models
                 profile.CreateMap<Event, EventModel>()
                     .ForMember(e => e.ParticipantId, cfg =>
                     cfg.MapFrom(e => e.Participants.Select(p => p.UserId).ToList()))
+                    .ForMember(e=> e.Photo, cfg=> cfg.MapFrom(e=> e.Photo))
                     .ForMember(e => e.ParticipantsCount, cfg => cfg.MapFrom(e => e.Participants.Count));
             }
         }

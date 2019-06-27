@@ -41,7 +41,7 @@ namespace FriendsAndTravel.Controllers
 
             this.postService.Create(this.User.GetUserId(), model.Feeling, model.Text, model.Photo);
 
-            return Redirect("/");
+            return RedirectToAction("Index", "Profile");
         }
 
         public IActionResult Edit(int postId)

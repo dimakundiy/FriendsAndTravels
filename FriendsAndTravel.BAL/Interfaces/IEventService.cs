@@ -12,12 +12,14 @@ namespace FriendsAndTravel.BAL.Interfaces
 {
     public interface IEventService 
     {
-        void Create(string imageUrl, string title, string location, string description, DateTime dateStarts, DateTime dateEnds, string creatorId);
+        void Create(EventDTO e);
 
         bool Exists(int id);
+        EventModel EventById(int eventId);
 
         EventModel Details(int id);
 
+        IEnumerable<EventModel> EventsByUserId(string userId);
         IEnumerable<EventModel> UpcomingThreeEvents();
 
         void AddUserToEvent(string userId, int eventId);

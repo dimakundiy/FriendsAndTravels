@@ -21,7 +21,8 @@ namespace FriendsAndTravel.Models
         public string Username { get; set; }
 
         [Required]
-        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
 
         [Required]

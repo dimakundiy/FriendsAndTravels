@@ -10,8 +10,7 @@ namespace Model.Models
 {
   public   class EventFormModel
     {
-        [Display(Name = "Photo Url")]
-        public string ImageUrl { get; set; }
+       
 
         [Required]
         [MaxLength(DataConstants.MaxEventTitleLength)]
@@ -19,6 +18,9 @@ namespace Model.Models
 
         [Required]
         public string Location { get; set; }
+
+        [Display(Name = "Upload a photo")]
+        public IFormFile Photo { get; set; }
 
         [Required]
         public string Description { get; set; }

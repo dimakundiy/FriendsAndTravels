@@ -65,7 +65,7 @@ namespace FriendsAndTravel.BAL.Services
         public bool Exists(int id) => this.db.Posts.Any(p => p.Id == id);
 
       
-
+ 
         public void Like(int postId)
         {
             if (this.Exists(postId))

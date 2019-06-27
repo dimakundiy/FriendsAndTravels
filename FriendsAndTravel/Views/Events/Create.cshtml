@@ -20,30 +20,30 @@
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateStarts"></label>
-                <input asp-for="DateStarts" class="form-control" />
-                <span asp-validation-for="DateStarts" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateEnds"></label>
-                <input asp-for="DateEnds" class="form-control" />
-                <span asp-validation-for="DateEnds" class="text-danger"></span>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-primary">Create</button>
-            <a href='javascript:history.go(-1)' class="btn btn-default">Cancel</a>
-        </form>
+            <label asp-for="Photo"></label>
+            <input asp-for="Photo" class="form-control" />
+            <span asp-validation-for="Photo" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateStarts"></label>
+        <input asp-for="DateStarts" class="form-control" />
+        <span asp-validation-for="DateStarts" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateEnds"></label>
+        <input asp-for="DateEnds" class="form-control" />
+        <span asp-validation-for="DateEnds" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a href='javascript:history.go(-1)' class="btn btn-default">Cancel</a>
+    </form>
+</div>
 </div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
