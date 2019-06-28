@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Create Your Event";
 }
-<h2 class="text-center">@ViewData["Title"]</h2>
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <form method="post">
@@ -20,29 +19,38 @@
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="ImUrl"></label>
-            <input asp-for="ImUrl" class="form-control" />
-            <span asp-validation-for="ImUrl" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <input asp-for="Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DateStarts"></label>
-        <input asp-for="DateStarts" class="form-control" />
-        <span asp-validation-for="DateStarts" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DateEnds"></label>
-        <input asp-for="DateEnds" class="form-control" />
-        <span asp-validation-for="DateEnds" class="text-danger"></span>
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a href='javascript:history.go(-1)' class="btn btn-default">Cancel</a>
-    </form>
+                <label asp-for="ImUrl"></label>
+                <input asp-for="ImUrl" class="form-control" />
+                <span asp-validation-for="ImUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateStarts"></label>
+                <input asp-for="DateStarts" class="form-control" />
+                <span asp-validation-for="DateStarts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateEnds"></label>
+                <input asp-for="DateEnds" class="form-control" />
+                <span asp-validation-for="DateEnds" class="text-danger"></span>
+            </div>
+            <ul class="ks-cboxtags">
+                @foreach (var item in Model.Categories)
+                {
+                    <li>
+                        <input name="SelectedCategories" type="checkbox" id="@item.Id" @if (Model.SelectedCategories.Contains(item.Tag)) { <text> checked</text> } value="@item.Tag">
+                        <label for="@item.Id">@item.Tag</label>
+                    </li>
+                }
+            </ul>
+            <br />
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a href='javascript:history.go(-1)' class="btn btn-default">Cancel</a>
+        </form>
 </div>
 </div>
 @section Scripts {

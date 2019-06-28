@@ -88,7 +88,7 @@ namespace FriendsAndTravel.BAL.Services
                 .ToList();
             return mapper.Map<IEnumerable<EventModel>>(ev);
         }
-        public void Create(EventDTO e)
+        public async Task<OperationDetails> Create(EventDTO e)
         {
             var ev = new Event
             {
@@ -102,9 +102,17 @@ namespace FriendsAndTravel.BAL.Services
             };
             
             ev.Participants.Add(new EventUser { UserId = e.CreatorId });
-
+            foreach (var item in e.Categories)
+            {
+                unitOfWork.EventCategoryRepository.Add(new EventCategory
+                {
+                    Event = ev,
+                    Category = unitOfWork.CategoryRepository.GetByTitle(item)
+                });
+            }
             this.db.Events.Add(ev);
             this.db.SaveChanges();
+            return new OperationDetails(true, "Ok", "");
         }
 
         public EventModel Details(int id)

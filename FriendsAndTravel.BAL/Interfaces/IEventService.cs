@@ -12,7 +12,7 @@ namespace FriendsAndTravel.BAL.Interfaces
 {
     public interface IEventService 
     {
-        void Create(EventDTO e);
+        Task<OperationDetails> Create(EventDTO e);
         IEnumerable<EventDTO> Events();
         bool Exists(int id);
         EventModel EventById(int eventId);

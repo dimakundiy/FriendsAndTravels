@@ -14,14 +14,14 @@
         <div class="row">
             @if (!Model.ParticipantId.Contains(User.GetUserId()))
             {
-                <a asp-controller="Events" asp-action="JointEvent" asp-route-id="@Model.Id" class="btn btn-primary">Going</a>
+            <a asp-controller="Events" asp-action="JointEvent" asp-route-id="@Model.Id" class="btn btn-primary">I'll go</a>
             }
             <a href='javascript:history.go(-1)' class="btn btn-default">Back</a>
 
         </div>
-        @if (User.GetUserId()==@Model.OwnerId || User.IsInRole("Admin"))
+        @if (User.GetUserId() == @Model.OwnerId || User.IsInRole("Admin"))
         {
-        <a asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            <a asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
         }
     </div>
 </div>
