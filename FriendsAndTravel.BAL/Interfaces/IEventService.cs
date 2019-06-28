@@ -16,9 +16,9 @@ namespace FriendsAndTravel.BAL.Interfaces
         IEnumerable<EventDTO> Events();
         bool Exists(int id);
         EventModel EventById(int eventId);
-
+        bool UserIsAuthorizedToEdit(int eventId, string userId);
         EventModel Details(int id);
-        void DeleteEvent(int event_id);
+        void Delete(int eventId);
         IEnumerable<EventModel> EventsByUserId(string userId);
         IEnumerable<EventModel> UpcomingThreeEvents();
 

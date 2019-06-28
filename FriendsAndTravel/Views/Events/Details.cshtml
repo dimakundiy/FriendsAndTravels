@@ -21,7 +21,7 @@
         </div>
         @if (User.GetUserId()==@Model.OwnerId || User.IsInRole("Admin"))
         {
-        <a asp-controller="Events" asp-action="DeleteEvent" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
         }
     </div>
 </div>

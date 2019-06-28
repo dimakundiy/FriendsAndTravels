@@ -27,14 +27,14 @@ namespace FriendsAndTravel.Mapping
              .ForMember(p => p.UserProfilePicture, cfg => cfg.MapFrom(p => p.User.Avatar))
             .ForMember(p => p.UserFullName, cfg => cfg.MapFrom(p => p.User.UserName));
 
-            CreateMap<Event, EventDTO>();
-
+            CreateMap<Event, EventDTO>()
+            .ForMember(dest => dest.ImUrl, opts => opts.MapFrom(src => src.ImageUrl));
             CreateMap<EventDTO, EventModel>();
 
             CreateMap<EventDTO, EventFormModel>();
             CreateMap<Event, EventFormModel>();
             CreateMap<EventFormModel, EventModel>();
-            
+       
             CreateMap<Event, EventModel>()
             .ForMember(dest => dest.ImUrl, opts => opts.MapFrom(src => src.ImageUrl))
                     .ForMember(e => e.ParticipantId, cfg =>

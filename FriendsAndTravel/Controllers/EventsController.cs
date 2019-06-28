@@ -30,7 +30,8 @@ namespace FriendsAndTravel.Controllers
         [HttpGet]
         public IActionResult AllEvents()
         {
-            return View();
+           // return Ok(eventService.Events());
+            return View(eventService.Events());
         }
         [HttpPost]
    
@@ -53,10 +54,18 @@ namespace FriendsAndTravel.Controllers
 
             return RedirectToAction("Index", "Profile");
         }
-        public IActionResult DeleteEvent(int event_id)
+        
+        
+        public IActionResult Delete(int id)
         {
-            eventService.DeleteEvent(event_id);
-            return RedirectToAction("Index", "Profile");
+            if (!this.eventService.UserIsAuthorizedToEdit(id, this.User.GetUserId()))
+            {
+                return BadRequest();
+            }
+
+            this.eventService.Delete(id);
+
+            return RedirectToAction("Index", "Profile", new { id = this.User.GetUserId() });
         }
         public IActionResult Details(int id)
         {

@@ -34,14 +34,10 @@ namespace FriendsAndTravel.BAL.Services
         }
         public IEnumerable<EventDTO> Events()
         {
-            var events = unitOfWork.EventRepository.GetAll().AsEnumerable();
+            var events = unitOfWork.EventRepository.GetAll().ToList();
             return mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
         }
-        public void DeleteEvent(int event_id)
-        {
-            unitOfWork.EventRepository.Delete(unitOfWork.EventRepository.GetById(event_id));
-            unitOfWork.SaveAsync();
-        }
+       
         public void AddUserToEvent(string userId, int eventId)
         {
             if (this.Exists(eventId))
@@ -60,6 +56,14 @@ namespace FriendsAndTravel.BAL.Services
 
                 this.db.SaveChanges();
             }
+        }
+
+        public void Delete(int eventId)
+        {
+            var events = this.db.Events.Find(eventId);
+
+            this.db.Remove(events);
+            this.db.SaveChanges();
         }
 
         public EventModel EventById(int eventId)
@@ -121,6 +125,6 @@ namespace FriendsAndTravel.BAL.Services
 
         public bool Exists(int id) => this.db.Events.Any(e => e.Id == id);
 
-       
+        public bool UserIsAuthorizedToEdit(int eventid, string userId) => this.db.Events.Any(p => p.Id == eventid && p.OwnerId == userId);
     }
 }
