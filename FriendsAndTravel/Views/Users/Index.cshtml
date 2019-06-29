@@ -3,18 +3,18 @@
     ViewBag.Title = "List of users";
 }
 
-<a asp-action="Create">Add new user</a>
 
-<table class="table">
-    <tr><th>Email</th><th>Birthday</th><th></th></tr>
+
+<table class="table table-bordered table-dark table-hover ">
+    <tr><th>Email</th><th>Birthday</th><th>Actions</th></tr>
     @foreach (var user in Model)
     {
         <tr>
             <td>@user.Email</td>
-            <td>@user.Birthday</td>
+            <td>@user.Birthday.Date.ToShortDateString()</td>
             <td>
                 <form asp-action="Delete" asp-route-id="@user.Id" method="post">
-                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
                     <a class="btn btn-sm btn-primary" asp-action="ChangePassword" asp-route-id="@user.Id">Change password</a>
                     <button type="submit" class="btn btn-sm btn-danger">
                         Delete
@@ -24,3 +24,4 @@
         </tr>
     }
 </table>
+<a asp-action="Create" class="btn btn-success">Add new user</a>

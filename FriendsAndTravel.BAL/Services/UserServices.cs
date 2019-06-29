@@ -65,7 +65,11 @@ namespace FriendsAndTravel.BAL.Services
             // находим пользователя    
 
             var user = await Database.UserManager.FindByEmailAsync(userDto.Email);
+            if (user == null) {
+                return false;
+            }
             var username = user.UserName;
+            
             var auth = await Database.SignInManager.PasswordSignInAsync(username, userDto.Password, false, lockoutOnFailure: false);
             // авторизуем его 
             return auth.Succeeded;
