@@ -75,9 +75,8 @@
                            asp-action="Like"
                            asp-route-postId="@post.Id"
                            class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                            <span class="glyphicon glyphicon-thumbs-up"></span> Like @post.Likes
                         </a>
-                   
                         <a asp-controller="Posts" asp-action="Edit" asp-route-postId="@post.Id" class="btn btn-warning btn-sm">Edit</a>
                         <a asp-controller="Posts" asp-action="Delete" asp-route-postId="@post.Id" class="btn btn-danger btn-sm">Delete</a>
                     </div>
@@ -106,13 +105,14 @@
                 <p><strong>My Events</strong></p>
                 @foreach (var ev in Model.Events)
                 {
-                    <div class="thumbnail">
-                        <p><strong>@ev.Title</strong></p>
-                        <img src="@ev.ImUrl" width="100" height="100">
-                        <p><strong>@ev.Location</strong></p>
-                        <p>@ev.DateStarts.ToShortDateString() - @ev.DateEnds.ToShortDateString()</p>
-                        <a asp-controller="Events" asp-action="Details" asp-route-id="@ev.Id" class="btn btn-primary">Info</a>
-                    </div>
+                <div class="thumbnail">
+                    <p><strong>@ev.Title</strong></p>
+                    <img src="@ev.ImUrl" width="100" height="100">
+                    <p><strong>@ev.Location</strong></p>
+                    <p>@ev.DateStarts.ToShortDateString() - @ev.DateEnds.ToShortDateString()</p>
+                    
+                    <a asp-controller="Events" asp-action="Details" asp-route-id="@ev.Id" class="btn btn-primary">Info</a>
+                </div>
                 }
 
             }
@@ -120,7 +120,7 @@
                 <a asp-controller="Events" asp-action="Create" class="btn btn-primary">Create Event</a>
             </div>
             <div class="row">
-                <a asp-controller="Events" asp-action="AllEvents" class="btn btn-primary">List of Events</a>
+                <a asp-controller="Events" asp-action="AllEvents" class="btn btn-primary">All Events</a>
             </div>
         </div>
         </div>

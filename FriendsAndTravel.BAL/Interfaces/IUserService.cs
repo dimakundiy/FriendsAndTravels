@@ -4,6 +4,7 @@ using FriendsAndTravel.Data.Entities;
 using FriendsAndTravel.Data.InterfacesModel;
 using FriendsAndTravel.Models;
 using Microsoft.AspNetCore.Http;
+using Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,6 @@ namespace FriendsAndTravel.BAL.Interfaces
         Task<bool> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);
         Task<UserDTO> FindProfileByUserName(string UserName);
-       
+      
     }
 }

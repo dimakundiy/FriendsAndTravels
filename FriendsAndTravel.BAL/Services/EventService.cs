@@ -34,6 +34,7 @@ namespace FriendsAndTravel.BAL.Services
         }
         public IEnumerable<EventDTO> Events()
         {
+
             var events = unitOfWork.EventRepository.GetAll().ToList();
             return mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
         }
@@ -104,7 +105,7 @@ namespace FriendsAndTravel.BAL.Services
             ev.Participants.Add(new EventUser { UserId = e.CreatorId });
             foreach (var item in e.Categories)
             {
-                unitOfWork.EventCategoryRepository.Add(new EventCategory
+                ev.EventCategories.Add(new EventCategory
                 {
                     Event = ev,
                     Category = unitOfWork.CategoryRepository.GetByTitle(item)

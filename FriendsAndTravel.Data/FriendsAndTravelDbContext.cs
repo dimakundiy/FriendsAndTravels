@@ -42,8 +42,9 @@ namespace FriendsAndTravel.Data
             builder.ApplyConfiguration(new EventCategoryConfiguration());
             base.OnModelCreating(builder);
 
+            
 
-              builder.Entity<IdentityRole>().HasData(
+            builder.Entity<IdentityRole>().HasData(
             new IdentityRole() { Name = "Admin", NormalizedName = "Admin".ToUpper() },
                 new IdentityRole()
                 {

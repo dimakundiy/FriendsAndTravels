@@ -68,7 +68,7 @@ namespace FriendsAndTravel.Controllers
             };
             return View(model);
         }
-       
+     
     }
 }
 

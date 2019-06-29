@@ -20,8 +20,9 @@ namespace FriendsAndTravel.Data.Configurations
 
             builder
                .HasOne(eu => eu.Category)
-               .WithMany(e => e.Events)
+               .WithMany(e => e.EventCategories)
                .HasForeignKey(eu => eu.CategoryId);
+
         }
     }
 }

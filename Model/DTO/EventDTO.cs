@@ -19,7 +19,7 @@ namespace Model.DTO
         public string ImUrl { get; set; }
         public List<string> Categories { get; set; }
         public string UserId { get; set; }
-        public User Owner { get; set; }
+        public string OwnerName { get; set; }
         public Event Event { get; set; }
     }
 }

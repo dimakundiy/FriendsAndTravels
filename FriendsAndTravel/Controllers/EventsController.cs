@@ -60,6 +60,7 @@ namespace FriendsAndTravel.Controllers
                 CreatorId =this.User.GetUserId(),
                 Categories = model.SelectedCategories,
                 ImUrl =model.ImUrl,
+              
             };
 
             await eventService.Create(

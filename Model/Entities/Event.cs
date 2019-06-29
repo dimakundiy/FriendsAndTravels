@@ -35,6 +35,7 @@ namespace FriendsAndTravel.Data.Entities
           public string OwnerId { get; set; }
         public virtual User Owner { get; set; }
         public ICollection<EventUser> Participants { get; set; } = new List<EventUser>();
-         public ICollection<EventCategory>  EventCategories { get; set; } = new List<EventCategory>();
+
+        public ICollection<EventCategory>  EventCategories { get; set; } = new List<EventCategory>();
     }
 }

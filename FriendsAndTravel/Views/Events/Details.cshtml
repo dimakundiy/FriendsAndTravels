@@ -8,8 +8,11 @@
             <img src="@Model.ImUrl" alt="Event" class="img-responsive">
             <p><strong>@Model.Location</strong></p>
             <p>@Model.DateStarts.ToShortDateString()</p>
-            <p>@Model.Description</p>
+            <p>@Model.Description</p>   
             <small class="text-left">Participants: @Model.ParticipantsCount</small>
+            <span class="card-media-body-supporting-bottom-text subtle">
+
+            </span>
         </div>
         <div class="row">
             @if (!Model.ParticipantId.Contains(User.GetUserId()))
