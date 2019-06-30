@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FriendsAndTravel.Common.Mapping;
 using FriendsAndTravel.Data.Entities;
 using FriendsAndTravel.Data.Entities.Enums;
 using System;

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FriendsAndTravel.BAL.DTO;
-using FriendsAndTravel.Common.Mapping;
 using FriendsAndTravel.Data.Entities;
 using FriendsAndTravel.Models;
 using Model.DTO;
