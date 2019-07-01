@@ -1,0 +1,16 @@
+﻿@using Model.Models
+@model EventFormModel
+@{
+    ViewData["Title"] = "Edit Events";
+}
+<h3 class="text-center">@ViewData["Title"]</h3>
+
+<div class="wall">
+    <div class="col-md-12 col-md-offset-0 ">
+        @Html.Partial("Create", Model)
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

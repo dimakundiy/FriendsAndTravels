@@ -10,7 +10,6 @@ namespace Model.Entities
  public   class EventCategory
     {
 
-        [Key]
         public int Id { get; set; }
         [ForeignKey("Event")]
         public int EventId { get; set; }

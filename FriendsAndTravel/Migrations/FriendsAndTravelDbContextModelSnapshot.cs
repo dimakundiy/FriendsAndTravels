@@ -241,8 +241,8 @@ namespace FriendsAndTravel.Migrations
                     b.ToTable("Role");
 
                     b.HasData(
-                        new { Id = "c0bcbdba-0895-4f14-b4b9-ed21d677024e", ConcurrencyStamp = "3c8ed07e-75bb-471d-a831-7d0beda69515", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "2991f08f-3794-4392-b530-c616e1cd628d", ConcurrencyStamp = "9cb2c896-acdf-48c1-a750-5f76aa57d5d0", Name = "User", NormalizedName = "USER" }
+                        new { Id = "b870668d-24b3-4cb3-b9b9-9935fcd3cc0b", ConcurrencyStamp = "ebbab970-d7b8-4698-985a-1e08df4bdb56", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "55aad979-0689-4267-b76d-b76d30b2b6c1", ConcurrencyStamp = "4682c920-6222-4ad3-9337-e9d8d4f2a76c", Name = "User", NormalizedName = "USER" }
                     );
                 });
 
@@ -404,8 +404,6 @@ namespace FriendsAndTravel.Migrations
 
                     b.HasKey("EventId", "CategoryId");
 
-                    b.HasAlternateKey("Id");
-
                     b.HasIndex("CategoryId");
 
                     b.ToTable("EventCategories");
@@ -561,7 +559,7 @@ namespace FriendsAndTravel.Migrations
             modelBuilder.Entity("Model.Entities.EventCategory", b =>
                 {
                     b.HasOne("FriendsAndTravel.Data.Entities.Categories", "Category")
-                        .WithMany("Events")
+                        .WithMany("EventCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 

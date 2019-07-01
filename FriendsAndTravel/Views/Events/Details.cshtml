@@ -6,30 +6,31 @@
         <div class="thumbnail">
             <div class="col-sm-2">
                 <img src="@Model.UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="55" width="55" alt="Avatar">
-                <hr />
+
             </div>
             <div class="col-sm-10 text-left">
-                <div class="row"><strong>@Model.OwnerName</strong></div>  
+                <div class="row"><strong>@Model.OwnerName</strong></div>
             </div>
-            
+            <br />
+            <br />
             <h2><strong>@Model.Title</strong></h2>
             <img src="@Model.ImUrl" alt="Event" class="img-responsive">
             <p><strong>@Model.Location</strong></p>
             <p>@Model.DateStarts.ToShortDateString()</p>
             <p>@Model.Description</p>
-            <p>@Model.categories<p>
-                <small class="text-left">Participants: @Model.ParticipantsCount</small>
-                @foreach (var x in Model.SelectedCategories)
-                {
+
+            <small class="text-left">Participants: @Model.ParticipantsCount</small>
+            @foreach (var x in Model.SelectedCategories)
+            {
                 <p>
                     #@x &nbsp;
                 </p>
             }
-            </div>
+        </div>
         <div class="row">
             @if (!Model.ParticipantId.Contains(User.GetUserId()))
             {
-            <a asp-controller="Events" asp-action="JointEvent" asp-route-id="@Model.Id" class="btn btn-primary">I'll go</a>
+                <a asp-controller="Events" asp-action="JointEvent" asp-route-id="@Model.Id" class="btn btn-primary">I'll go</a>
             }
             <a href='javascript:history.go(-1)' class="btn btn-default">Back</a>
 
@@ -37,6 +38,7 @@
         @if (User.GetUserId() == @Model.OwnerId || User.IsInRole("Admin"))
         {
             <a asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            <a asp-controller="Events" asp-action="Edit" asp-route-event_id="@Model.Id" class="btn btn-warning">Edit</a>
         }
     </div>
 </div>

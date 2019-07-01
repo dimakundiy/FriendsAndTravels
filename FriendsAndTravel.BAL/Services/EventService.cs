@@ -32,12 +32,6 @@ namespace FriendsAndTravel.BAL.Services
             this.mapper = mapper;
             this.db = db;
         }
-        public IEnumerable<EventDTO> Events()
-        {
-            var events = unitOfWork.EventRepository.GetAll().ToList();
-
-            return mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
-        }
        
         public void AddUserToEvent(string userId, int eventId)
         {
@@ -115,6 +109,36 @@ namespace FriendsAndTravel.BAL.Services
             this.db.SaveChanges();
             return new OperationDetails(true, "Ok", "");
         }
+
+        public async Task<OperationDetails> Edit(int event_id,EventDTO ev) {
+
+            var events = this.db.Events.Find(event_id);        
+            events.Title = ev.Title;
+            events.Location = ev.Location;
+            events.Description = ev.Description;
+            events.DateEnds = ev.DateEnds;
+            events.DateStarts = ev.DateStarts;
+            events.ImageUrl = ev.ImUrl;
+            foreach (var item in unitOfWork.EventCategoryRepository.FindByEventId(events.Id))
+            {
+                unitOfWork.EventCategoryRepository.Delete(item);
+            }
+
+
+            foreach (var item in ev.Categories)
+            {
+                unitOfWork.EventCategoryRepository.Add(new EventCategory
+                {
+                    Category = unitOfWork.CategoryRepository.GetByTitle(item),
+                    Event = events
+                });
+            }
+
+            await unitOfWork.SaveAsync();
+
+            return new OperationDetails(true, "Ok", "");
+        }
+        
         private EventDTO GetAllDataForEvent(Event item)
         {
             EventDTO eventDTO = new EventDTO
@@ -128,20 +152,11 @@ namespace FriendsAndTravel.BAL.Services
         {   
             if (this.Exists(id))
             {
-
-
-                //  var ev = this.db.EventCategories
-                //  .Where(e => e.Id == id)
-                //  .Include(e => e.Event)  
-                //  .Include(e => e.Category)
-                //  .Select(x=>x.Category).ToList();
-
                 var ev = this.db.Events.Where(x => x.Id == id)
                     .Include(x => x.Participants)
                     .Include(x=>x.Owner)
                     .Include(x => x.EventCategories)
-                    .ThenInclude(z=>z.Category)
-    
+                    .ThenInclude(z=>z.Category)  
                     .FirstOrDefault();
                 var em = mapper.Map<EventModel>(ev);
                 em.SelectedCategories = ev.EventCategories.Select(x => x.Category.Tag).ToList();
@@ -153,10 +168,26 @@ namespace FriendsAndTravel.BAL.Services
             return null;
         }
 
-       
+        public IEnumerable<EventDTO> Events()
+        {
+            var events = unitOfWork.EventRepository.GetAll().ToList();
+
+            return mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
+        }
+
+        IEnumerable<EventDTO> IEventService.SearchEvents(int Category_id) {
+            var ev = this.db.EventCategories.Where(x => x.CategoryId == Category_id)
+                  .Include(z => z.Event)
+                  .Include(a => a.Category)
+                   .ToList();
+            var em= mapper.Map<IEnumerable<EventDTO>>(ev);
+            return em;
+        }
 
         public bool Exists(int id) => this.db.Events.Any(e => e.Id == id);
 
         public bool UserIsAuthorizedToEdit(int eventid, string userId) => this.db.Events.Any(p => p.Id == eventid && p.OwnerId == userId);
+
+       
     }
 }

@@ -1,4 +1,6 @@
-﻿using FriendsAndTravel.BAL.DTO;
+﻿using AutoMapper;
+using FriendsAndTravel.BAL.DTO;
+using FriendsAndTravel.BAL.Infrastructure;
 using FriendsAndTravel.BAL.Interfaces;
 using FriendsAndTravel.Data;
 using FriendsAndTravel.Data.Interfaces;
@@ -20,8 +22,10 @@ namespace FriendsAndTravel.Controllers
         private readonly IEventService eventService;
         private readonly IPhotoService photoService;
         private readonly ICategoryService categoryService;
-        public EventsController(IEventService eventService, IPhotoService photoService, IUnitOfWork unitOfWork, ICategoryService categoryService)
+        private readonly IMapper mapper;
+        public EventsController(IEventService eventService, IPhotoService photoService, IUnitOfWork unitOfWork, ICategoryService categoryService, IMapper mapper)
         {
+            this.mapper = mapper;
             this.categoryService = categoryService;
             this.unitOfWork = unitOfWork;
             this.photoService = photoService;
@@ -69,14 +73,46 @@ namespace FriendsAndTravel.Controllers
 
             return RedirectToAction("Index", "Profile");
         }
-        
-        
+
+
+        [HttpGet]
+        public IActionResult Edit(int event_id)
+        {
+            var eventInfo = this.eventService.EventById(event_id);
+            var eventFormModel = new EventFormModel
+            {
+               Title=eventInfo.Title,
+                Location = eventInfo.Location,
+                Description = eventInfo.Description,
+                DateEnds = eventInfo.DateEnds,
+                DateStarts = eventInfo.DateStarts,
+                ImUrl = eventInfo.ImUrl,
+                Categories = categoryService.UserCategories(this.User.GetUserId()),
+                SelectedCategories = new List<string>()
+            };
+
+            return this.ViewOrNotFound(eventFormModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int event_id, EventFormModel model)
+        {
+            EventDTO eventDTO = new EventDTO
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Description = model.Description,
+                DateStarts = model.DateStarts,
+                DateEnds = model.DateEnds,
+                Location=model.Location,
+                Categories = model.SelectedCategories,
+                ImUrl = model.ImUrl,
+            };
+             await eventService.Edit(event_id,eventDTO);
+            return RedirectToAction("Index", "Profile");
+        }
         public IActionResult Delete(int id)
         {
-            
-
             this.eventService.Delete(id);
-
             return RedirectToAction("Index", "Profile", new { id = this.User.GetUserId() });
         }
         public IActionResult Details(int id)
