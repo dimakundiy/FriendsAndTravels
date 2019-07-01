@@ -4,16 +4,28 @@
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3 well text-center">
         <div class="thumbnail">
-            <h4><strong>@Model.Title</strong></h4>
+            <div class="col-sm-2">
+                <img src="@Model.UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="55" width="55" alt="Avatar">
+                <hr />
+            </div>
+            <div class="col-sm-10 text-left">
+                <div class="row"><strong>@Model.OwnerName</strong></div>  
+            </div>
+            
+            <h2><strong>@Model.Title</strong></h2>
             <img src="@Model.ImUrl" alt="Event" class="img-responsive">
             <p><strong>@Model.Location</strong></p>
             <p>@Model.DateStarts.ToShortDateString()</p>
-            <p>@Model.Description</p>   
-            <small class="text-left">Participants: @Model.ParticipantsCount</small>
-            <span class="card-media-body-supporting-bottom-text subtle">
-
-            </span>
-        </div>
+            <p>@Model.Description</p>
+            <p>@Model.categories<p>
+                <small class="text-left">Participants: @Model.ParticipantsCount</small>
+                @foreach (var x in Model.SelectedCategories)
+                {
+                <p>
+                    #@x &nbsp;
+                </p>
+            }
+            </div>
         <div class="row">
             @if (!Model.ParticipantId.Contains(User.GetUserId()))
             {

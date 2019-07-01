@@ -18,6 +18,7 @@ namespace Model.DTO
         public string CreatorId { get; set; }
         public string ImUrl { get; set; }
         public List<string> Categories { get; set; }
+         public List<Categories> categories { get; set; }
         public string UserId { get; set; }
         public string OwnerName { get; set; }
         public Event Event { get; set; }

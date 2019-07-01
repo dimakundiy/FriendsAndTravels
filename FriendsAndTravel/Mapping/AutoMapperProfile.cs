@@ -30,8 +30,9 @@ namespace FriendsAndTravel.Mapping
             .ForMember(dest => dest.ImUrl, opts => opts.MapFrom(src => src.ImageUrl));
             CreateMap<EventDTO, EventModel>();
 
-            CreateMap<EventDTO, EventFormModel>()
-                .ForMember(dest => dest.SelectedCategories, opt => opt.MapFrom(src => src.Categories));
+            CreateMap<EventModel, EventDTO>()
+                .ForMember(dest => dest.categories, opt => opt.MapFrom(src => src.Categories))
+                 .ForMember(dest => dest.Categories, opts => opts.MapFrom(src => src.SelectedCategories));
             CreateMap<Event, EventFormModel>();
             CreateMap<EventModel, EventFormModel > ()
                  .ForMember(c => c.Categories, ctg => ctg.MapFrom(src => src.Categories));

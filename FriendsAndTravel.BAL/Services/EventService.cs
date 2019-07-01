@@ -34,8 +34,8 @@ namespace FriendsAndTravel.BAL.Services
         }
         public IEnumerable<EventDTO> Events()
         {
-
             var events = unitOfWork.EventRepository.GetAll().ToList();
+
             return mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
         }
        
@@ -105,7 +105,7 @@ namespace FriendsAndTravel.BAL.Services
             ev.Participants.Add(new EventUser { UserId = e.CreatorId });
             foreach (var item in e.Categories)
             {
-                ev.EventCategories.Add(new EventCategory
+                 ev.EventCategories.Add(new EventCategory
                 {
                     Event = ev,
                     Category = unitOfWork.CategoryRepository.GetByTitle(item)
@@ -115,16 +115,39 @@ namespace FriendsAndTravel.BAL.Services
             this.db.SaveChanges();
             return new OperationDetails(true, "Ok", "");
         }
+        private EventDTO GetAllDataForEvent(Event item)
+        {
+            EventDTO eventDTO = new EventDTO
+            {
+                categories = unitOfWork.EventCategoryRepository.GetCategoriesByEventId(item.Id).ToList()
+            };
+            return eventDTO;
+        }
 
         public EventModel Details(int id)
-        {
+        {   
             if (this.Exists(id))
             {
-                var ev = this.db.Events
-                    .Include(e => e.Participants)
-                    .FirstOrDefault(e => e.Id == id);
 
-                return mapper.Map<EventModel>(ev);
+
+                //  var ev = this.db.EventCategories
+                //  .Where(e => e.Id == id)
+                //  .Include(e => e.Event)  
+                //  .Include(e => e.Category)
+                //  .Select(x=>x.Category).ToList();
+
+                var ev = this.db.Events.Where(x => x.Id == id)
+                    .Include(x => x.Participants)
+                    .Include(x=>x.Owner)
+                    .Include(x => x.EventCategories)
+                    .ThenInclude(z=>z.Category)
+    
+                    .FirstOrDefault();
+                var em = mapper.Map<EventModel>(ev);
+                em.SelectedCategories = ev.EventCategories.Select(x => x.Category.Tag).ToList();
+                em.OwnerName = ev.Owner.UserName;
+                em.UserProfilePicture = ev.Owner.Avatar;
+                return em;
             }
 
             return null;

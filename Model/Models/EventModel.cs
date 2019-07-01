@@ -30,10 +30,10 @@ namespace Model.Models
 
             public List<string> ParticipantId { get; set; } = new List<string>();
             public List<string> SelectedCategories { get; set; }
-            public List<Categories> Categories { get; set; }
-
+            public List<string> Categories { get; set; }
+        public List<Categories> categories { get; set; }
             public string OwnerId { get; set; }
-     
-        
-        }
+        public string OwnerName { get; set;}
+        public byte[] UserProfilePicture { get; set; }
+    }
 }
