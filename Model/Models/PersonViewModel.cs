@@ -35,7 +35,7 @@ namespace FriendsAndTravel.Models
         public IEnumerable<PostModel> Posts { get; set; } = new List<PostModel>();
         public IEnumerable<EventModel> Events { get; set; } = new List<EventModel>();
         public IEnumerable<EventCategory> eventCategories { get; set; } = new List<EventCategory>();
-        public IEnumerable<Comment> Comments { get; set; } = new List<Comment>();
+     
         public IEnumerable<string> Interests { get; set; } = new List<string>();
 
       

@@ -29,10 +29,11 @@ namespace FriendsAndTravel.Controllers
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
         private readonly IEventService eventService;
-  
+        private readonly ICommentService commentService;
        
-        public ProfileController(FriendsAndTravelDbContext context, IHostingEnvironment appEnvironment, IMapper mapper,  UserManager<User> userManager, IPostService postService, ICategoryService categoryService, IEventService eventService)
+        public ProfileController(FriendsAndTravelDbContext context, IHostingEnvironment appEnvironment, IMapper mapper,  UserManager<User> userManager, IPostService postService, ICategoryService categoryService, IEventService eventService, ICommentService commentService)
         {
+            this.commentService = commentService;
             this.eventService = eventService;
             _categoryService = categoryService;
             _postService = postService;
@@ -51,6 +52,7 @@ namespace FriendsAndTravel.Controllers
             {
                 user_categories.Add(item.Tag);
             }
+           
             var model = new PersonViewModel
             {
                 Id = user.Id,
@@ -63,8 +65,9 @@ namespace FriendsAndTravel.Controllers
                 Age = DateTime.Today.Year - user.Birthday.Year,
                 UserCategories = user_categories,
                 Posts = _postService.PostsByUserId(user.Id, 1, 5),
-                Events = eventService.EventsByUserId(user.Id)
-                //Events= eventService.UpcomingThreeEvents()
+                Events = eventService.EventsByUserId(user.Id),
+               
+              
             };
             return View(model);
         }

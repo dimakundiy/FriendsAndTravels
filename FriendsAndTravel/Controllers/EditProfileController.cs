@@ -80,15 +80,7 @@ namespace FriendsAndTravel.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting User Name for user with ID '{user.Id}'.");
                 }
             }
-         //   var location = user.Location;
-          //  if (model.Location != location)
-          //  {
-          //     var setEmailResult = await _userManager.User;
-             //   if (!setEmailResult.Succeeded)
-              //  {
-                //    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
-               // }
-          //  }
+        
 
             var phoneNumber = user.PhoneNumber;
             if (model.Phone != phoneNumber)

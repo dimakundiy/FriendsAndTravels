@@ -20,13 +20,13 @@ namespace FriendsAndTravel.BAL.Services
         private readonly FriendsAndTravelDbContext db;
         private readonly IPhotoService photoService;
         private readonly IMapper mapper;
-
-        public PostService(FriendsAndTravelDbContext db, IPhotoService photoService, IMapper mapper)
+        private readonly ICommentService commentService;
+        public PostService(FriendsAndTravelDbContext db, IPhotoService photoService, IMapper mapper, ICommentService commentService)
         {
             this.mapper = mapper;
             this.db = db;
             this.photoService = photoService;
-     
+            this.commentService = commentService;
         }
 
         public void Create(string userId, Feeling feeling, string text, IFormFile photo)
@@ -48,7 +48,7 @@ namespace FriendsAndTravel.BAL.Services
         public void Delete(int postId)
         {
             var post = this.db.Posts.Find(postId);
-          
+           this.commentService.DeleteCommentsByPostId(postId);
             this.db.Remove(post);
             this.db.SaveChanges();
         }
@@ -78,7 +78,9 @@ namespace FriendsAndTravel.BAL.Services
 
         public PostModel PostById(int postId)
         {
-            var posts= this.db.Posts.Where(p => p.Id == postId).FirstOrDefault();
+            var posts= this.db.Posts.Where(p => p.Id == postId)
+                .Include(c=>c.User)
+                .FirstOrDefault();
             return mapper.Map<PostModel>(posts);
         }
 
@@ -91,6 +93,7 @@ namespace FriendsAndTravel.BAL.Services
                 .ThenInclude(p => p.User)              
                 .OrderByDescending(p => p.Date);
 
+           
             return mapper.Map<IEnumerable<PostModel>>(posts);
 
             

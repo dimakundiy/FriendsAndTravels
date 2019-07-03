@@ -65,7 +65,8 @@ namespace FriendsAndTravel.BAL.Services
         {
             var ev= this.db
                 .Events
-                .Where(p => p.Id == eventId).FirstOrDefault();
+                .Where(p => p.Id == eventId)
+                .FirstOrDefault();
             return mapper.Map<EventModel>(ev);
         }
         public IEnumerable<EventModel> EventsByUserId(string userId) {

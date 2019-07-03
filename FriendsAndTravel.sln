@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriendsAndTravel.BAL", "Fri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{7CA97D01-3A5C-4C6C-91CB-7AA9E9C5F505}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriendsAndTravel.Tests", "FriendsAndTravel.Tests\FriendsAndTravel.Tests.csproj", "{FD4F07E3-F1C7-4185-A243-34DAC677EA16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7CA97D01-3A5C-4C6C-91CB-7AA9E9C5F505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CA97D01-3A5C-4C6C-91CB-7AA9E9C5F505}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CA97D01-3A5C-4C6C-91CB-7AA9E9C5F505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4F07E3-F1C7-4185-A243-34DAC677EA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4F07E3-F1C7-4185-A243-34DAC677EA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4F07E3-F1C7-4185-A243-34DAC677EA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4F07E3-F1C7-4185-A243-34DAC677EA16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

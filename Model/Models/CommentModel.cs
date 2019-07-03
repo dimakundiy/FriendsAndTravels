@@ -1,26 +1,23 @@
-﻿using FriendsAndTravel.Data.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace FriendsAndTravel.Data.Entities
+namespace Model.Models
 {
-    public class Comment
+   public class CommentModel
     {
         public int Id { get; set; }
 
-        [Required]
         public string Text { get; set; }
 
         public DateTime Date { get; set; }
 
         public string UserId { get; set; }
 
-        public User User { get; set; }
+        public string UserFullName { get; set; }
 
         public int PostId { get; set; }
 
-        public Post Post { get; set; }
+        public byte[] UserProfilePicture { get; set; }
     }
 }

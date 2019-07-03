@@ -1,0 +1,109 @@
+﻿@using Model.Models
+@using FriendsAndTravel.Extensions
+@model List<CommentModel>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@if (Model.Count <= 2)
+{
+    @foreach (var comment in Model)
+    {
+<div class="row">
+    <div class="col-sm-2">
+        <img src="@comment.UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="40" width="40" alt="Avatar">
+    </div>
+    <div class="col-sm-10 text-left">
+        <div class="row">
+            <a asp-controller="EditProfile" asp-action="Index"><strong>@comment.UserFullName</strong></a>
+            <br/>
+            @comment.Text
+        </div>
+        <div class="row">
+            <small>@comment.Date</small>
+            @if (User.Identity.Name == @comment.UserFullName || User.IsInRole("Admin"))
+            {
+                <form asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id" method="post">
+                    <button type="submit" class="btn btn-link">
+                        Delete
+                    </button>
+                </form>}
+        </div>
+    </div>
+
+</div>
+        <br />
+    }
+}
+else
+{
+    @for (int i = 0; i <= 1; i++)
+    {
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="@Model[i].UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="40" width="40" alt="Avatar">
+            </div>
+            <div class="col-sm-10 text-left">
+                <div class="row">
+                    <a asp-controller="EditProfile" asp-action="Index"><strong>@Model[i].UserFullName</strong></a>
+                    <br />
+                    @Model[i].Text
+                </div>
+                <div class="row">
+                    <small>@Model[i].Date</small>
+                    @if (User.Identity.Name == @Model[i].UserFullName || User.IsInRole("Admin"))
+                    {
+                        <form asp-controller="Comment" asp-action="Delete" asp-route-id="@Model[i].Id" method="post">
+                            <button type="submit" class="btn btn-link">
+                                Delete
+                            </button>
+                        </form>}
+                </div>
+            </div>
+        </div>
+        <br />
+    }
+    <div id="1" style="display:none">
+        @for (int i = 2; i <= Model.Count - 1; i++)
+        {
+            <div class="row">
+                <div class="col-sm-2">
+                    <img src="@Model[i].UserProfilePicture.ToRenderablePictureString()" class="img-circle pull-left" height="40" width="40" alt="Avatar">
+                </div>
+                <div class="col-sm-10 text-left">
+                    <div class="row">
+                        <a asp-controller="EditProfile" asp-action="Index"><strong>@Model[i].UserFullName</strong></a>
+                        <br />
+                        @Model[i].Text
+                    </div>
+                    <div class="row">
+                        <small>@Model[i].Date</small>
+                        @if (User.Identity.Name == @Model[i].UserFullName || User.IsInRole("Admin"))
+                        {
+                            <form asp-controller="Comment" asp-action="Delete" asp-route-id="@Model[i].Id" method="post">
+                                <button type="submit" class="btn btn-link">
+                                    Delete
+                                </button>
+                            </form>}
+                    </div>
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+}
+@if (Model.Count > 2)
+{
+    <div class="row">
+        <button id="show" class="btn-group-sm btn-primary">More</button>
+        <button id="hide" class="btn-group-sm btn-primary">Hide</button>
+    </div>
+}
+<script>$(document).ready(function () {
+        $("#hide").click(function () {
+            $("#1").hide(500);
+        });
+    });</script>
+<script>$(document).ready(function () {
+        $("#show").click(function () {
+            $("#1").show(500);
+        });
+    });</script>
+

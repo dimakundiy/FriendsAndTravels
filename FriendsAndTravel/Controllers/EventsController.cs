@@ -35,10 +35,10 @@ namespace FriendsAndTravel.Controllers
         [HttpGet]
         public IActionResult AllEvents()
         {
-           // return Ok(eventService.Events());
+         
             return View(eventService.Events());
         }
-        // Create event
+     
   
         public IActionResult Create()
         {
@@ -75,7 +75,7 @@ namespace FriendsAndTravel.Controllers
         }
 
 
-        [HttpGet]
+  
         public IActionResult Edit(int event_id)
         {
             var eventInfo = this.eventService.EventById(event_id);
@@ -98,7 +98,7 @@ namespace FriendsAndTravel.Controllers
         {
             EventDTO eventDTO = new EventDTO
             {
-                Id = model.Id,
+               
                 Title = model.Title,
                 Description = model.Description,
                 DateStarts = model.DateStarts,

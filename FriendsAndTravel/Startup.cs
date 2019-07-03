@@ -31,9 +31,9 @@ namespace FriendsAndTravel
             }
 
             public IConfiguration Configuration { get; }
-
-            // This method gets called by the runtime. Use this method to add services to the container.
-            public void ConfigureServices(IServiceCollection services)
+       
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
             {
                 services.AddDbContext<FriendsAndTravelDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("FriendsAndTravel")));
@@ -74,7 +74,7 @@ namespace FriendsAndTravel
              
 
             services.AddAutoMapper();
-         
+            services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddMvc();
             services.AddTransient<IAdminManager, AdminManager>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
@@ -93,6 +93,7 @@ namespace FriendsAndTravel
             services.AddTransient<IPhotoRepository, PhotoRepository>();
             services.AddTransient<IEventPhotoRepository, EventPhotoRepository>();
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<ICommentService, CommentService>();
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,7 @@ namespace Model.Models
 {
   public   class EventFormModel
         {
-        public int Id { get; set; }
+      
         [Required]
         [MaxLength(DataConstants.MaxEventTitleLength)]
         public string Title { get; set; }

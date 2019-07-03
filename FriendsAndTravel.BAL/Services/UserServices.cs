@@ -45,11 +45,9 @@ namespace FriendsAndTravel.BAL.Services
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault().ToString(), "");
-                // добавляем роль
+             
                 await Database.UserManager.AddToRoleAsync(user, userDto.Role);  
-                // создаем профиль клиента
               
-               // Profile clientProfile = new Profile { Id = user.Id, Birthday = userDto.Birthday, Gender = userDto.Gender, Location = location };
                
                 await Database.SaveAsync();
                 return new OperationDetails(true, "Registration successfully completed!", "");
@@ -62,7 +60,7 @@ namespace FriendsAndTravel.BAL.Services
 
         public async Task<bool> Authenticate(UserDTO userDto)
         {
-            // находим пользователя    
+             
 
             var user = await Database.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null) {
@@ -71,11 +69,11 @@ namespace FriendsAndTravel.BAL.Services
             var username = user.UserName;
             
             var auth = await Database.SignInManager.PasswordSignInAsync(username, userDto.Password, false, lockoutOnFailure: false);
-            // авторизуем его 
+           
             return auth.Succeeded;
         }
 
-        // начальная инициализация бд
+      
         public async Task SetInitialData(UserDTO adminDto, List<string> roles)
         {
             foreach (string roleName in roles)

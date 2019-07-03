@@ -69,18 +69,30 @@
 
             }
 
-                <div class="row">
-                    <div class="col-sm-4">
-                        <a asp-controller="Posts"
-                           asp-action="Like"
-                           asp-route-postId="@post.Id"
-                           class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-thumbs-up"></span> Like @post.Likes
-                        </a>
-                        <a asp-controller="Posts" asp-action="Edit" asp-route-postId="@post.Id" class="btn btn-warning btn-sm">Edit</a>
-                        <a asp-controller="Posts" asp-action="Delete" asp-route-postId="@post.Id" class="btn btn-danger btn-sm">Delete</a>
-                    </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <a asp-controller="Posts"
+                       asp-action="Like"
+                       asp-route-postId="@post.Id"
+                       class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> Like 
+                    </a>
+                    <a asp-controller="Comment" asp-action="Create" asp-route-postId="@post.Id" class="btn btn-default btn-sm">Comment</a>
+                    <a asp-controller="Posts" asp-action="Edit" asp-route-postId="@post.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-controller="Posts" asp-action="Delete" asp-route-postId="@post.Id" class="btn btn-danger btn-sm">Delete</a>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <small>@post.Likes Likes / @post.Comments.Count() Comments</small>
+                </div>
+            </div>
+            @if (post.Comments.Any())
+            {
+                <hr />
+                @Html.Partial("_PostComments", post.Comments)
+
+            }
         </div>
 
             }

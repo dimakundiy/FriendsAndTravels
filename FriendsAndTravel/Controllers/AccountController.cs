@@ -81,9 +81,7 @@ namespace FriendsAndTravel.Controllers
                     Phone = model.Phone,
                     Location = new Location { NameLocation = model.Location },
                     Role = "user",
-                    Gender = model.Gender,
-                  
-                    //ProfilePicture = this.photoService.PhotoAsBytes(model.Photo),
+                    Gender = model.Gender, 
                     Password = model.Password
                 };  
                 OperationDetails operationDetails = await userService.Create(userDto);

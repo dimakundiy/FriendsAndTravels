@@ -1,13 +1,12 @@
-﻿using AutoMapper;
-using FriendsAndTravel.Data.Entities;
-using FriendsAndTravel.Data.Entities.Enums;
+﻿using FriendsAndTravel.Data.Entities.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Model.Models
 {
-    public class PostModel 
+    public class PostCommentCreateModel
     {
         public int Id { get; set; }
 
@@ -17,18 +16,18 @@ namespace Model.Models
 
         public int Likes { get; set; }
 
-        public byte[] Photo { get; set; }
+        public string Photo { get; set; }
 
-        public byte[] UserProfilePicture { get; set; }
-
-        public string UserId { get; set; }
+        public string UserProfilePicture { get; set; }
 
         public string UserFullName { get; set; }
 
         public Feeling Feeling { get; set; }
 
-        public IEnumerable<CommentModel> Comments { get; set; } = new List<CommentModel>();
+        [Required]
+        [Display(Name = "Comment:")]
+        public string CommentText { get; set; }
 
-
+        
     }
 }

@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<FriendsAndTravel.Data.Entities.User>
 
-<h2>Список пользователей</h2>
-<table class="table">
+<h2>List of users</h2>
+<table class="table table-bordered table-dark table-hover ">
+    <tr><th>Email</th><th>Actions</th>
     @foreach (var user in Model)
     {
         <tr>
