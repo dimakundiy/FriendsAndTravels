@@ -71,7 +71,7 @@ namespace FriendsAndTravel.Controllers
             {
                 return NotFound();
             }
-            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Username = user.UserName, Phone = user.PhoneNumber};
+            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, Username = user.UserName, PhoneNumber = user.PhoneNumber};
             return View(model);
         }
 
@@ -85,7 +85,7 @@ namespace FriendsAndTravel.Controllers
                 {
                     user.Email = model.Email;
                     user.UserName = model.Username;
-                    user.PhoneNumber = model.Phone;
+                    user.PhoneNumber = model.PhoneNumber;
 
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
